@@ -1,0 +1,3 @@
+entry(one && two) {
+    1 + 2
+} 

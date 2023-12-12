@@ -1,0 +1,13 @@
+main 0/n 
+Error, file is NULLmain 0/n 
+entry(one && two) {
+    1 + 2
+} 
+main 0/n 
+entry(one && two) {
+    1 + 2
+} 
+main 0/n 
+entry(one && two) {
+    1 + 2
+} 
