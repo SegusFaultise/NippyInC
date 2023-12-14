@@ -125,6 +125,8 @@ char *extract_word(char *file_lines, int *i) {
     free(word);
 }
 
+
+// func
 char *tokenizer(char *file_lines) {
     initialize_token_map(token_map);
 
