@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <strings.h>
 
 #define MAX_SIZE 50
 #define MAP_SIZE 100
@@ -13,6 +14,7 @@ enum TokenType {
     ADDITION,
     MINUS,
     INTEGER,
+    ALPHA,
     AND,
     LEFT_ROUND_BRACKET,
     RIGHT_ROUND_BRACKET,
@@ -43,6 +45,8 @@ char *token_type_enum_to_string(enum TokenType token_type) {
                 return "MINUS";
             case INTEGER:
                 return "INTEGER";
+            case ALPHA:
+                return "ALPHA";
             case AND:
                 return "AND";
             case LEFT_ROUND_BRACKET:
@@ -80,11 +84,45 @@ void insert_token(struct TokenMap token_map[], char *token, enum TokenType type)
 }
 
 void print_token_map(struct TokenMap token_map[]) {
+    printf("\n");
+
     for(int i = 0; i < MAP_SIZE; i++) {
         if(token_map[i].token_type != NUM_KEYS) {
             printf("Token Value: [ %s ] | Token Type: [ %s ]\n", token_map[i].token_value, token_type_enum_to_string(token_map[i].token_type));
         }
     }
+}
+
+char *extract_number(char *file_lines, int *index) {
+    int start = *index;
+    char *numeric_literal = (char*)malloc(*index - start + 1);
+
+    while(isdigit(file_lines[*index])) {
+        (*index)++;    
+    }
+    strncpy(numeric_literal, file_lines + start, *index - start);
+
+    numeric_literal[*index - start] = '\0';
+
+    return numeric_literal;
+
+    free(numeric_literal);
+}
+
+char *extract_word(char *file_lines, int *i) {
+    int start = *i;
+    char *word = (char*)malloc(*i - start + 1);
+
+    while (isalpha((unsigned char)file_lines[*i])) {
+        (*i)++;
+    }
+    strncpy(word, file_lines + start, *i - start);
+
+    word[*i - start] = '\0';
+
+    return word;
+
+    free(word);
 }
 
 char *tokenizer(char *file_lines) {
@@ -121,15 +159,11 @@ char *tokenizer(char *file_lines) {
                 break;
             default:
                 if(isdigit(file_lines[i])) {
-                    char *str = (char *)malloc(2);
-                    
-                    *str = file_lines[i];
-                    
-                    insert_token(token_map, str, INTEGER);
-                    free(str);
+                    insert_token(token_map, extract_number(file_lines, &i), INTEGER);
                 }
-
-                //insert_token(token_map, file_lines, INTEGER);
+                if(isalpha(file_lines[i])) {
+                    insert_token(token_map, extract_word(file_lines, &i), ALPHA);
+                }
                 break;
         }
     }
@@ -137,7 +171,6 @@ char *tokenizer(char *file_lines) {
 
     return "";
 }
-
 
 char *file_reader(char file_path[]) {
     FILE *fp = fopen(file_path, "r");
@@ -159,7 +192,7 @@ char *file_reader(char file_path[]) {
     size_t total_size = 0;
     char *line;
 
-    while ((line = fgets(file_lines + total_size, buffer_size - total_size, fp)) != NULL) {
+    while((line = fgets(file_lines + total_size, buffer_size - total_size, fp)) != NULL) {
         total_size += strlen(line);
 
         if (total_size + buffer_size > buffer_size) {
@@ -174,6 +207,7 @@ char *file_reader(char file_path[]) {
         }
     }
     fclose(fp);
+    printf("%s", file_lines);
 
     return file_lines;
 }
@@ -181,7 +215,7 @@ char *file_reader(char file_path[]) {
 int main() {
     printf("\nmain 0/n\n\n");
 
-    char *file_lines = file_reader("main.nip");
+    char *file_lines = file_reader("../main.nip");
 
     tokenizer(file_lines);
 
