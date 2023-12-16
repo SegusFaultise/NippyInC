@@ -67,6 +67,21 @@ void insert_token(struct TokenMap token_map[], const char *token, enum TokenType
     }
 }
 
+char *get_token_value_based_on_type(struct TokenMap token_map[], enum TokenType type) {
+    for(int i = 0; i < MAP_SIZE; i++) {
+        if(token_map[i].token_type == type) {
+            printf("\nFound Token Type ->  %s \n", token_type_enum_to_string(token_map[i].token_type));
+
+            return token_map[i].token_value;
+        }
+        else if(token_map[i].token_type == NUM_KEYS){
+            continue;
+        }
+    }
+    printf("Token not found");
+    return NULL;
+}
+
 void print_token_map(struct TokenMap token_map[]) {
     printf("\n");
 

@@ -37,6 +37,11 @@ void initialize_token_map(struct TokenMap token_map[]);
 void insert_token(struct TokenMap token_map[], const char *token, enum TokenType type);
 
 /*
+ * Gets the token value based token type
+ * */
+char *get_token_value_based_on_type(struct TokenMap token_map[], enum TokenType type);
+
+/*
  * Prints out all the sets of token values and token types
  * */
 void print_token_map(struct TokenMap token_map[]);

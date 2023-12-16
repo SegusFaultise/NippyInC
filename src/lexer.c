@@ -45,7 +45,7 @@ char *extract_alpha(char *file_lines, int *i) {
     free(alpha_literal);
 }
 
-void *tokenizer(char *file_lines) {
+void tokenizer(char *file_lines) {
     initialize_token_map(_token_map);
 
     for(int i = 0; file_lines[i] != '\0'; i++) {
@@ -100,5 +100,6 @@ void *tokenizer(char *file_lines) {
                 break;
         }
     }
+    get_token_value_based_on_type(_token_map, INTEGER);
     print_token_map(_token_map);
 }
