@@ -35,6 +35,10 @@ char *token_type_enum_to_string(enum TokenType token_type) {
                 return "RIGHT_SQUARE_BRACKET";
             case END_OF_LINE:
                 return "END_OF_LINE";
+            case ASSIGN:
+                return "ASSIGN";
+            case UNDERSCORE:
+                return "UNDERSCORE";
             case NUM_KEYS:
                 return "NUM_KEYS";
             default:

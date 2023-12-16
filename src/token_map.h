@@ -14,6 +14,8 @@ enum TokenType {
     LEFT_SQUARE_BRACKET,
     RIGHT_SQUARE_BRACKET,
     END_OF_LINE,
+    ASSIGN,
+    UNDERSCORE,
     NUM_KEYS
 };
 

@@ -47,8 +47,6 @@ char *extract_alpha(char *file_lines, int *i) {
 
 void *tokenizer(char *file_lines) {
     initialize_token_map(_token_map);
-    
-    //printf("%s\n", file_lines);
 
     for(int i = 0; file_lines[i] != '\0'; i++) {
         if(isdigit(file_lines[i])) {
@@ -90,6 +88,12 @@ void *tokenizer(char *file_lines) {
                 break;
             case ';':
                 insert_token(_token_map, ";", END_OF_LINE);
+                break;
+            case '=':
+                insert_token(_token_map, "=", ASSIGN);
+                break;
+            case '_':
+                insert_token(_token_map, "_", UNDERSCORE);
                 break;
             default:
                 printf("Unhandled character: %c (%d)\n", file_lines[i], file_lines[i]);
