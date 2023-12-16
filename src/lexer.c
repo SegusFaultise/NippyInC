@@ -9,38 +9,40 @@ struct TokenMap _token_map[MAP_SIZE];
 
 char *extract_number(char *file_lines, int *index) {
     int start = *index;
+    char *numeric_literal = (char*)malloc(*index - start + 1);
 
     while (isdigit(file_lines[*index])) {
         (*index)++;
     }
 
-    // Allocate memory for the numeric literal
-    char *numeric_literal = (char*)malloc(*index - start + 1);
-
     if (numeric_literal != NULL) {
         strncpy(numeric_literal, file_lines + start, *index - start);
         numeric_literal[*index - start] = '\0';
     }
-
     return numeric_literal;
+
+    free(numeric_literal);
 }
 
-char *extract_word(char *file_lines, int *i) {
+char *extract_alpha(char *file_lines, int *i) {
     int start = *i;
+    char *alpha_literal = (char*)malloc(*i - start + 1);
 
     while (isalpha((unsigned char)file_lines[*i])) {
         (*i)++;
     }
-
-    // Allocate memory for the word
-    char *word = (char*)malloc(*i - start + 1);
-
-    if (word != NULL) {
-        strncpy(word, file_lines + start, *i - start);
-        word[*i - start] = '\0';
+    
+    if(alpha_literal == NULL) {
+        printf("Error: alpha literal is null");
+        free(alpha_literal);
     }
+    else if (alpha_literal != NULL) {
+        strncpy(alpha_literal, file_lines + start, *i - start);
+        alpha_literal[*i - start] = '\0';
+    }
+    return alpha_literal;
 
-    return word;
+    free(alpha_literal);
 }
 
 void *tokenizer(char *file_lines) {
@@ -53,7 +55,7 @@ void *tokenizer(char *file_lines) {
             insert_token(_token_map, extract_number(file_lines, &i), INTEGER);
         }
         else if(isalpha(file_lines[i])) {
-            insert_token(_token_map, extract_word(file_lines, &i), ALPHA);
+            insert_token(_token_map, extract_alpha(file_lines, &i), ALPHA);
         }
 
         switch(file_lines[i]) {
