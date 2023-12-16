@@ -1,13 +1,40 @@
-main 0/n 
-Error, file is NULLmain 0/n 
+
+main 0/n
+
 entry(one && two) {
-    1 + 2
+    1 + 2 - 3;
 } 
-main 0/n 
+
+Token Value: [ entry ] | Token Type: [ ALPHA ]
+Token Value: [ one ] | Token Type: [ ALPHA ]
+Token Value: [ & ] | Token Type: [ AND ]
+Token Value: [ & ] | Token Type: [ AND ]
+Token Value: [ two ] | Token Type: [ ALPHA ]
+Token Value: [ { ] | Token Type: [ LEFT_SQUARE_BRACKET ]
+Token Value: [ 1 ] | Token Type: [ INTEGER ]
+Token Value: [ + ] | Token Type: [ ADDITION ]
+Token Value: [ 2 ] | Token Type: [ INTEGER ]
+Token Value: [ - ] | Token Type: [ MINUS ]
+Token Value: [ 3 ] | Token Type: [ INTEGER ]
+Token Value: [ } ] | Token Type: [ RIGHT_SQUARE_BRACKET ]
+
+
+main 0/n
+
 entry(one && two) {
-    1 + 2
+    1 + 2 - 3;
 } 
-main 0/n 
-entry(one && two) {
-    1 + 2
-} 
+
+Token Value: [ entry ] | Token Type: [ ALPHA ]
+Token Value: [ one ] | Token Type: [ ALPHA ]
+Token Value: [ & ] | Token Type: [ AND ]
+Token Value: [ & ] | Token Type: [ AND ]
+Token Value: [ two ] | Token Type: [ ALPHA ]
+Token Value: [ { ] | Token Type: [ LEFT_SQUARE_BRACKET ]
+Token Value: [ 1 ] | Token Type: [ INTEGER ]
+Token Value: [ + ] | Token Type: [ ADDITION ]
+Token Value: [ 2 ] | Token Type: [ INTEGER ]
+Token Value: [ - ] | Token Type: [ MINUS ]
+Token Value: [ 3 ] | Token Type: [ INTEGER ]
+Token Value: [ } ] | Token Type: [ RIGHT_SQUARE_BRACKET ]
+

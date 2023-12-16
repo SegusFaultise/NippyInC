@@ -1,3 +1,4 @@
-entry(one && two) {
+entry ( one && two ) {
     1 + 2 - 3;
+    3 / 3;
 } 
