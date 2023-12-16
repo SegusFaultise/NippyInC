@@ -2,4 +2,4 @@
 
 cd build/
 
-valgrind ./nippy >> ../memory_log.txt
+valgrind ./nippy &>> ../logs/memory_log.txt

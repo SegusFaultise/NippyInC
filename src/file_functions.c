@@ -25,22 +25,20 @@ char *remove_spaces(char *str){
 }
 
 char *file_reader(char file_path[]) {
+    int buffer_size = 200;
     FILE *fp = fopen(file_path, "r");
 
     if (fp == NULL) {
         printf("Error, file is NULL");
         return NULL;
     }
-
-    unsigned long buffer_size = 255;
-    char *file_lines = malloc(buffer_size);
+    char *file_lines = malloc(buffer_size * sizeof(char));
 
     if (file_lines == NULL) {
         perror("Memory allocation error");
         fclose(fp);
         return NULL;
     }
-
     size_t total_size = 0;
     char *line;
 
@@ -54,6 +52,8 @@ char *file_reader(char file_path[]) {
             if (file_lines == NULL) {
                 perror("Memory reallocation error");
                 fclose(fp);
+                free(file_lines);
+
                 return NULL;
             }
         }
@@ -65,4 +65,6 @@ char *file_reader(char file_path[]) {
     print_file(mod_file_lines, file_path);
 
     return mod_file_lines;
+
+    free(mod_file_lines);
 }
