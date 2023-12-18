@@ -1,6 +1,1 @@
-entry ( one && two ) {
-    num_one = 10;
-    num_two = 22;
-
-    as sss a
-} 
+20 + 20 + 10; 

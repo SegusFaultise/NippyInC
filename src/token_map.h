@@ -21,6 +21,7 @@ enum TokenType {
 
 struct TokenMap {
     char token_value[MAX_SIZE];
+    int token_position;
     enum TokenType token_type;
 };
 
@@ -34,12 +35,14 @@ void initialize_token_map(struct TokenMap token_map[]);
 /*
  * Inserts a token string value and enum TokenType value into the type param
  * */
-void insert_token(struct TokenMap token_map[], const char *token, enum TokenType type);
+void insert_token(struct TokenMap token_map[], const char *token, int token_position, enum TokenType type);
 
 /*
  * Gets the token value based token type
  * */
 char *get_token_value_based_on_type(struct TokenMap token_map[], enum TokenType type);
+
+void ast(struct TokenMap token_map[]);
 
 /*
  * Prints out all the sets of token values and token types

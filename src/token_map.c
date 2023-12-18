@@ -50,16 +50,18 @@ char *token_type_enum_to_string(enum TokenType token_type) {
 void initialize_token_map(struct TokenMap token_map[]) {
     for(int i = 0; i < MAP_SIZE; i++) {
         token_map[i].token_type = NUM_KEYS;
+        token_map[i].token_position = 0;
 
         strcpy(token_map[i].token_value, "");
     }
 }
 
-void insert_token(struct TokenMap token_map[], const char *token, enum TokenType type) {
+void insert_token(struct TokenMap token_map[], const char *token, int position, enum TokenType type) {
     for(int i = 0; i < MAP_SIZE; i++) {
         if(token_map[i].token_type == NUM_KEYS) {
             strcpy(token_map[i].token_value, token);
 
+            token_map[i].token_position = position;
             token_map[i].token_type = type;
 
             break;
@@ -82,14 +84,43 @@ char *get_token_value_based_on_type(struct TokenMap token_map[], enum TokenType 
     return NULL;
 }
 
+void ast(struct TokenMap token_map[]) {
+    int integer_positon;
+    int plus_position;
+
+    for(int i = 0; i < MAP_SIZE; i++) {
+        int integer = token_map[i].token_type == INTEGER;
+        int plus = token_map[i].token_type == ADDITION;
+
+        int integer_positon;
+        int plus_position;
+
+        if(integer) {
+            integer_positon = token_map[i].token_position;
+
+            int sum = atoi(token_map[i].token_value) + atoi(token_map[i].token_value);
+
+            printf("SUM: %d\n", sum);
+            printf("INT POS: %d\n", integer_positon);
+        }
+        else if(plus) {
+            plus_position = token_map[i].token_position;
+
+            printf("PLUS POS: %d\n", plus_position);
+        }
+    }
+}
+
 void print_token_map(struct TokenMap token_map[]) {
     printf("\n");
 
     for(int i = 0; i < MAP_SIZE; i++) {
         if(token_map[i].token_type != NUM_KEYS) {
-            printf("Token Value: [ %s ] | Token Type: [ %s ]\n", token_map[i].token_value, token_type_enum_to_string(token_map[i].token_type));
+            printf("Token Value: [ %s ] | Token Type: [ %s ] | Token position: %d\n", 
+                    token_map[i].token_value, 
+                    token_type_enum_to_string(token_map[i].token_type), 
+                    token_map[i].token_position);
         }
     }
-
     printf("\n");
 }
