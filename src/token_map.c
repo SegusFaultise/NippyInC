@@ -84,30 +84,18 @@ char *get_token_value_based_on_type(struct TokenMap token_map[], enum TokenType 
     return NULL;
 }
 
-void ast(struct TokenMap token_map[]) {
-    int integer_positon;
-    int plus_position;
+struct AstNode {
+    int position;
+    
+    struct AstNode *left;
+    struct AstNode *right;
+};
+
+void ast_insert(struct TokenMap token_map[]) {
+    struct AstNode *temp = NULL;
 
     for(int i = 0; i < MAP_SIZE; i++) {
-        int integer = token_map[i].token_type == INTEGER;
-        int plus = token_map[i].token_type == ADDITION;
-
-        int integer_positon;
-        int plus_position;
-
-        if(integer) {
-            integer_positon = token_map[i].token_position;
-
-            int sum = atoi(token_map[i].token_value) + atoi(token_map[i].token_value);
-
-            printf("SUM: %d\n", sum);
-            printf("INT POS: %d\n", integer_positon);
-        }
-        else if(plus) {
-            plus_position = token_map[i].token_position;
-
-            printf("PLUS POS: %d\n", plus_position);
-        }
+        
     }
 }
 
