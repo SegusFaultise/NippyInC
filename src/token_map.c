@@ -84,21 +84,6 @@ char *get_token_value_based_on_type(struct TokenMap token_map[], enum TokenType 
     return NULL;
 }
 
-struct AstNode {
-    int position;
-    
-    struct AstNode *left;
-    struct AstNode *right;
-};
-
-void ast_insert(struct TokenMap token_map[]) {
-    struct AstNode *temp = NULL;
-
-    for(int i = 0; i < MAP_SIZE; i++) {
-        
-    }
-}
-
 void print_token_map(struct TokenMap token_map[]) {
     printf("\n");
 
