@@ -7,6 +7,7 @@ project(nippy)
 include_directories(include)
 
 add_executable(nippy ${CMAKE_CURRENT_SOURCE_DIR}/main.c
+                     ${CMAKE_CURRENT_SOURCE_DIR}/ast.c
                      ${CMAKE_CURRENT_SOURCE_DIR}/lexer.c
                      ${CMAKE_CURRENT_SOURCE_DIR}/file_functions.c
                      ${CMAKE_CURRENT_SOURCE_DIR}/token_map.c)

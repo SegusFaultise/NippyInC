@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "token_map.h"
+#include "ast.h"
 
 struct TokenMap _token_map[MAP_SIZE];
 
@@ -103,6 +104,6 @@ void tokenizer(char *file_lines) {
         }
     }
     get_token_value_based_on_type(_token_map, INTEGER);
-    ast(_token_map);
+    add_token_positions_to_ast(_token_map); 
     print_token_map(_token_map);
 }

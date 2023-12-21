@@ -42,7 +42,7 @@ void insert_token(struct TokenMap token_map[], const char *token, int token_posi
  * */
 char *get_token_value_based_on_type(struct TokenMap token_map[], enum TokenType type);
 
-void ast(struct TokenMap token_map[]);
+void add_token_positions_to_ast(struct TokenMap token_map[]);
 
 /*
  * Prints out all the sets of token values and token types
