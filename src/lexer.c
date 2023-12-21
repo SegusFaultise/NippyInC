@@ -3,10 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "token_map.h"
 #include "ast.h"
 
-struct TokenMap _token_map[MAP_SIZE];
+struct AstNode **_ast_node[MAP_SIZE];
 
 char *extract_number(char *file_lines, int *index) {
     int start = *index;
@@ -49,61 +48,57 @@ char *extract_alpha(char *file_lines, int *i) {
 }
 
 void tokenizer(char *file_lines) {
-    initialize_token_map(_token_map);
-
     for(int i = 0; file_lines[i] != '\0'; i++) {
         if(isdigit(file_lines[i])) {
-            insert_token(_token_map, extract_number(file_lines, &i), i, INTEGER);
+            insert_token(_ast_node, extract_number(file_lines, &i), i, INTEGER);
         }
         else if(isalpha(file_lines[i])) {
-            insert_token(_token_map, extract_alpha(file_lines, &i), i, ALPHA);
+            insert_token(_ast_node, extract_alpha(file_lines, &i), i, ALPHA);
         }
 
         switch(file_lines[i]) {
             case '\n':
                 continue;
             case '+':
-                insert_token(_token_map, "+", i, ADDITION);
+                insert_token(_ast_node, "+", i, ADDITION);
                 break;
             case '-':
-                insert_token(_token_map, "-", i, MINUS);
+                insert_token(_ast_node, "-", i, MINUS);
                 break;
             case '/':
-                insert_token(_token_map, "/", i, DIVIDE);
+                insert_token(_ast_node, "/", i, DIVIDE);
                 break;
             case '*':
-                insert_token(_token_map, "*", i, MULTIPLY);
+                insert_token(_ast_node, "*", i, MULTIPLY);
                 break;
             case '(':
-                insert_token(_token_map, "(", i, LEFT_ROUND_BRACKET);
+                insert_token(_ast_node, "(", i, LEFT_ROUND_BRACKET);
                 break;
             case ')':
-                insert_token(_token_map, ")", i, RIGHT_ROUND_BRACKET);
+                insert_token(_ast_node, ")", i, RIGHT_ROUND_BRACKET);
                 break;
             case '{':
-                insert_token(_token_map, "{", i, LEFT_SQUARE_BRACKET);
+                insert_token(_ast_node, "{", i, LEFT_SQUARE_BRACKET);
                 break;
             case '}':
-                insert_token(_token_map, "}", i, RIGHT_SQUARE_BRACKET);
+                insert_token(_ast_node, "}", i, RIGHT_SQUARE_BRACKET);
                 break;
             case '&':
-                insert_token(_token_map, "&", i, AND);
+                insert_token(_ast_node, "&", i, AND);
                 break;
             case ';':
-                insert_token(_token_map, ";", i, END_OF_LINE);
+                insert_token(_ast_node, ";", i, END_OF_LINE);
                 break;
             case '=':
-                insert_token(_token_map, "=", i, ASSIGN);
+                insert_token(_ast_node, "=", i, ASSIGN);
                 break;
             case '_':
-                insert_token(_token_map, "_", i, UNDERSCORE);
+                insert_token(_ast_node, "_", i, UNDERSCORE);
                 break;
             default:
                 printf("Unhandled character: [ %c ] (%d)\n", file_lines[i], file_lines[i]);
                 break;
         }
     }
-    get_token_value_based_on_type(_token_map, INTEGER);
-    add_token_positions_to_ast(_token_map); 
-    print_token_map(_token_map);
+    in_order_traversal(*_ast_node);
 }
