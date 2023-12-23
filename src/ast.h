@@ -34,3 +34,5 @@ struct AstNode {
 void insert_token(struct AstNode **token_map, const char *token, int token_position, enum TokenType type);
 
 void in_order_traversal(struct AstNode *ast_root);
+
+void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_left);

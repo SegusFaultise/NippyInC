@@ -89,15 +89,76 @@ void insert_token(struct AstNode **token_map, const char *token, int position, e
 
 }
 
+void primary() {
+  printf("\033[1;36m");
+}
+
+void secondary() {
+  printf("\033[1;34m");
+}
+
+void reset () {
+  printf("\033[0m");
+}
+
 void in_order_traversal(struct AstNode *ast_root) {
     if(ast_root != NULL) {
         in_order_traversal(ast_root->left);
 
-        printf("AST NODE: [ token_position: ( %d ) || token_type: ( %s ) || token_value: ( %s ) ] ->\n", 
-                ast_root->token_position, 
-                token_type_enum_to_string(ast_root->token_type), 
-                ast_root->token_value);
+        secondary();
+        printf("AST NODE: [ token_position: "); 
+
+        primary();
+        printf("( %d ) ", ast_root->token_position);
+
+        secondary();
+        printf(" || ");
+        reset();
+
+        secondary();
+        printf("token_type: "); 
+
+        primary();
+        printf("[ %s ] ", token_type_enum_to_string(ast_root->token_type)); 
+
+        secondary();
+        printf(" || ");
+        reset();
+        
+        secondary();
+        printf("token_value: "); 
+
+        primary();
+        printf("[ '%s' ] ", ast_root->token_value); 
+
+        secondary();
+        printf(" ] -> \n\n");
+        reset();
 
         in_order_traversal(ast_root->right);
+    }
+}
+
+void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_left) {
+    if (ast_root != NULL) {
+        printf("%s", prefix);
+        printf(is_left ? "├── " : "└── ");
+
+        printf("AST NODE: [ token_position: ( %d ) || token_type: ( %s ) || token_value: ( %s )",
+               ast_root->token_position,
+               token_type_enum_to_string(ast_root->token_type),
+               ast_root->token_value);
+
+        if (ast_root->left != NULL || ast_root->right != NULL) {
+            printf("\n");
+
+            char new_prefix[255];
+            snprintf(new_prefix, sizeof(new_prefix), "%s%s", prefix, is_left ? "│   " : "    ");
+
+            print_tree_structure(ast_root->left, new_prefix, 1);
+            print_tree_structure(ast_root->right, new_prefix, 0);
+        } else {
+            printf(" ]\n");
+        }
     }
 }
