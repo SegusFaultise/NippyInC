@@ -20,7 +20,7 @@ enum TokenType {
 };
 
 struct AstNode {
-    char token_value[MAX_SIZE];
+    char token_value[MAP_SIZE];
     int token_position;
     enum TokenType token_type;
 
@@ -32,6 +32,8 @@ struct AstNode {
  * Inserts a token string value, enum TokenType value and token position into each AST node
  * */
 void insert_token(struct AstNode **token_map, const char *token, int token_position, enum TokenType type);
+
+int get_token_position(struct AstNode *ast_node, const char *token);
 
 void in_order_traversal(struct AstNode *ast_root);
 

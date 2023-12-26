@@ -21,8 +21,6 @@ char *extract_number(char *file_lines, int *index) {
         numeric_literal[*index - start] = '\0';
     }
     return numeric_literal;
-
-    free(numeric_literal);
 }
 
 char *extract_alpha(char *file_lines, int *i) {
@@ -32,7 +30,7 @@ char *extract_alpha(char *file_lines, int *i) {
     while(isalpha((unsigned char)file_lines[*i])) {
         (*i)++;
     }
-    
+
     if(alpha_literal == NULL) {
         printf("Error: alpha literal is null");
         free(alpha_literal);
@@ -43,11 +41,9 @@ char *extract_alpha(char *file_lines, int *i) {
         alpha_literal[*i - start] = '\0';
     }
     return alpha_literal;
-
-    free(alpha_literal);
 }
 
-void tokenizer(char *file_lines) {
+void tokenize(char *file_lines) {
     for(int i = 0; file_lines[i] != '\0'; i++) {
         if(isdigit(file_lines[i])) {
             insert_token(_ast_node, extract_number(file_lines, &i), i, INTEGER);
@@ -101,6 +97,15 @@ void tokenizer(char *file_lines) {
         }
     }
     in_order_traversal(*_ast_node);
+
+    int pos = get_token_position(*_ast_node, "+");
+
+    if (pos != -1) {
+        printf("The position of the token with value '+' is %d.\n", pos);
+    } 
+    else {
+        printf("Token with value '+' not found in the AST.\n");
+    }
     //print_tree_structure(*_ast_node, "", 0);
 
     free(*_ast_node);

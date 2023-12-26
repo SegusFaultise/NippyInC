@@ -4,8 +4,6 @@
 
 #include "ast.h"
 
-struct AstNode ast_node[MAP_SIZE];
-
 char *token_type_enum_to_string(enum TokenType token_type) {
     if(token_type == NUM_KEYS) {
         return NULL;
@@ -89,16 +87,39 @@ void insert_token(struct AstNode **token_map, const char *token, int position, e
 
 }
 
+int get_token_position(struct AstNode *root, const char *target_value) {
+    if (root == NULL) {
+        return -1; // Token not found
+    }
+
+    if (strcmp(root->token_value, target_value) == 0) {
+        return root->token_position; // Token found
+    }
+
+    int left_result = get_token_position(root->left, target_value);
+    if (left_result != -1) {
+        return left_result; // Token found in the left subtree
+    }
+
+    return get_token_position(root->right, target_value); // Token found in the right subtree (or not found at all)
+}
+
+void process_ast(struct AstNode *_ast_root) {
+    if(get_token_position(_ast_root, "+") < ) {
+
+    }
+}
+
 void primary() {
-  printf("\033[1;36m");
+    printf("\033[1;36m");
 }
 
 void secondary() {
-  printf("\033[1;34m");
+    printf("\033[1;34m");
 }
 
 void reset () {
-  printf("\033[0m");
+    printf("\033[0m");
 }
 
 void in_order_traversal(struct AstNode *ast_root) {
@@ -106,7 +127,7 @@ void in_order_traversal(struct AstNode *ast_root) {
         in_order_traversal(ast_root->left);
 
         secondary();
-        printf("AST NODE: [ token_position: "); 
+        printf("AST NODE -> token_position: "); 
 
         primary();
         printf("( %d ) ", ast_root->token_position);
@@ -124,15 +145,15 @@ void in_order_traversal(struct AstNode *ast_root) {
         secondary();
         printf(" || ");
         reset();
-        
+
         secondary();
         printf("token_value: "); 
 
         primary();
-        printf("[ '%s' ] ", ast_root->token_value); 
+        printf("[ '%s' ]", ast_root->token_value); 
 
         secondary();
-        printf(" ] -> \n\n");
+        printf("\n");
         reset();
 
         in_order_traversal(ast_root->right);
@@ -145,9 +166,9 @@ void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_l
         printf(is_left ? "├── " : "└── ");
 
         printf("AST NODE: [ token_position: ( %d ) || token_type: ( %s ) || token_value: ( %s )",
-               ast_root->token_position,
-               token_type_enum_to_string(ast_root->token_type),
-               ast_root->token_value);
+                ast_root->token_position,
+                token_type_enum_to_string(ast_root->token_type),
+                ast_root->token_value);
 
         if (ast_root->left != NULL || ast_root->right != NULL) {
             printf("\n");

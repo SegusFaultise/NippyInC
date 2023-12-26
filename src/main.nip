@@ -1,6 +1,3 @@
 entry(num_one && num_two) {
-    num_one = 10;
-    num_two = 4;
-
-    out(num_one + num_two);
+    10 + 20;
 }

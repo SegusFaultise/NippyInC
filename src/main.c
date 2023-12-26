@@ -8,7 +8,7 @@ int main() {
 
     char *file_lines = file_reader("../main.nip");
 
-    tokenizer(file_lines);
+    tokenize(file_lines);
 
     return 0;
 }
