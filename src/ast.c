@@ -89,25 +89,40 @@ void insert_token(struct AstNode **token_map, const char *token, int position, e
 
 int get_token_position(struct AstNode *root, const char *target_value) {
     if (root == NULL) {
-        return -1; // Token not found
+        return -1;
     }
 
     if (strcmp(root->token_value, target_value) == 0) {
-        return root->token_position; // Token found
+        return root->token_position;
     }
 
     int left_result = get_token_position(root->left, target_value);
     if (left_result != -1) {
-        return left_result; // Token found in the left subtree
+        return left_result;
     }
 
-    return get_token_position(root->right, target_value); // Token found in the right subtree (or not found at all)
+    return get_token_position(root->right, target_value);
 }
 
-void process_ast(struct AstNode *_ast_root) {
-    if(get_token_position(_ast_root, "+") < ) {
+// TODO: build peek_next_token() function that returns the next token whith type enum TokenType or string
+
+void process_ast(struct AstNode *ast_root) {
+    int addition_operator = get_token_position(ast_root, "+"); 
+    int left_integer = get_token_position(ast_root, "10");
+    int right_integer = get_token_position(ast_root, "20");
+
+    if(addition_operator > left_integer) {
+        printf("Left node: '%s' \n", ast_root->left->token_value);
 
     }
+    if(addition_operator < right_integer) {
+        ast_root->right++;
+    }
+    else {
+        printf("nope!");
+    }
+
+    printf("Right node: '%s' \n", ast_root->right->token_value);
 }
 
 void primary() {
@@ -183,3 +198,4 @@ void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_l
         }
     }
 }
+

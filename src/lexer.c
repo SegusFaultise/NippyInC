@@ -108,5 +108,7 @@ void tokenize(char *file_lines) {
     }
     //print_tree_structure(*_ast_node, "", 0);
 
+    process_ast(*_ast_node);
+
     free(*_ast_node);
 }

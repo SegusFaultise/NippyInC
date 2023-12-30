@@ -1,3 +1,6 @@
+#ifndef AST_H
+#define AST_H
+
 #define MAX_SIZE 255
 #define MAP_SIZE 255
 
@@ -35,6 +38,9 @@ void insert_token(struct AstNode **token_map, const char *token, int token_posit
 
 int get_token_position(struct AstNode *ast_node, const char *token);
 
+void process_ast(struct AstNode *ast_root);
+
 void in_order_traversal(struct AstNode *ast_root);
 
 void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_left);
+#endif
