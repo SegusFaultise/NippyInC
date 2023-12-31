@@ -9,7 +9,6 @@ int main() {
     char *file_lines = file_reader("../main.nip");
 
     tokenize(file_lines);
-    test();
 
     return 0;
 }

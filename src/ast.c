@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -49,8 +50,15 @@ char *token_type_enum_to_string(enum TokenType token_type) {
 struct AstNode* create_node(enum TokenType type, const char *value) {
     struct AstNode *new_node = (struct AstNode*)malloc(sizeof(struct AstNode));
 
+    if (new_node == NULL) {
+        printf("Error: Memory allocation failed!\n");
+        exit(EXIT_FAILURE);
+    }
+
     new_node->token_type = type;
+
     strcpy(new_node->token_alpha_value, value);
+
     new_node->left = NULL;
     new_node->right = NULL;
 
@@ -60,24 +68,56 @@ struct AstNode* create_node(enum TokenType type, const char *value) {
 void insert_token(struct AstNode **root, const char *token, enum TokenType type) {
     if (*root == NULL) {
         *root = create_node(type, token);
+
         return;
     }
 
-    // Insert based on the type of the token
-    if (type == ADDITION || type == MINUS || type == MULTIPLY || type == DIVIDE) {
-        struct AstNode *new_node = create_node(type, token);
-        new_node->left = *root;
-        *root = new_node;
-    } else {
-        // Insert based on alphabetical order for keywords and variables
+    int is_operator = (type == ADDITION || type == MULTIPLY || type == DIVIDE || type == MINUS);
+    int is_alpha = (type == ALPHA);
+    int is_integer = (type == INTEGER);
+    int token_type_is_operator = ((*root)->token_type == ADDITION || (*root)->token_type == MULTIPLY || (*root)->token_type == DIVIDE || (*root)->token_type == MINUS);
+
+    if(is_alpha) {
+        printf("ALPHA\n");
+
+        struct AstNode *new_root = create_node(type, token);
+
+        new_root->left = *root;
+        *root = new_root;
+    } 
+    else if(is_operator) {
+        printf("ADDITION\n");
+
+        struct AstNode *new_root = create_node(type, token);
+
+        new_root->left = *root;
+        *root = new_root;
+    }
+    else if(is_integer) {
+        printf("INTEGER\n");
+
+        if(token_type_is_operator) {
+
+            insert_token(&((*root)->right), token, type);
+        } 
+        else {
+            struct AstNode *new_root = create_node(type, token);
+
+            new_root->left = *root;
+            *root = new_root;
+        }
+    } 
+    else {
         int compareResult = strcmp(token, (*root)->token_alpha_value);
-        if (compareResult < 0) {
+
+        if(compareResult < 0) {
             insert_token(&((*root)->left), token, type);
-        } else if (compareResult > 0) {
+        } 
+        else if(compareResult > 0) {
             insert_token(&((*root)->right), token, type);
         }
-        // Ignore if the token is already in the tree
-    }}
+    }
+}
 
 int get_token_position(struct AstNode *root, const char *target_value) {
     if (root == NULL) {
@@ -114,6 +154,10 @@ int evaluate_ast(struct AstNode *root) {
             return evaluate_ast(root->left) * evaluate_ast(root->right);
         case DIVIDE:
             return evaluate_ast(root->left) / evaluate_ast(root->right);
+        case ASSIGN:
+        case ALPHA:
+            printf("Variable '%s' encountered during evaluation.\n", root->token_alpha_value);
+            return 0;
         default:
             printf("Error: Invalid node type!\n");
             return 0;

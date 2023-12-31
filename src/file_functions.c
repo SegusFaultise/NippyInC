@@ -9,6 +9,7 @@ void print_file(char *file_lines, char file_path[]) {
     printf("-------------\n");
 }
 
+// (!) Currently not in use but might be needed in the future.
 char *remove_spaces(char *str){
     int i = 0;
     int j = 0;
@@ -60,11 +61,11 @@ char *file_reader(char file_path[]) {
     }
     fclose(fp);
 
-    char *mod_file_lines = remove_spaces(file_lines);
+    //char *mod_file_lines = remove_spaces(file_lines);
     
-    print_file(mod_file_lines, file_path);
+    print_file(file_lines, file_path);
 
-    return mod_file_lines;
+    return file_lines;
 
-    free(mod_file_lines);
+    free(file_lines);
 }
