@@ -46,53 +46,45 @@ char *token_type_enum_to_string(enum TokenType token_type) {
     }
 }
 
-void insert_token(struct AstNode **token_map, const char *token, int position, enum TokenType type) {
-    struct AstNode *temp_node = (struct AstNode*)malloc(sizeof(struct AstNode));
+struct AstNode* create_node(enum TokenType type, const char *value) {
+    struct AstNode *new_node = (struct AstNode*)malloc(sizeof(struct AstNode));
 
-    temp_node->token_position = position;
-    temp_node->token_type = type;
-    strcpy(temp_node->token_value, token);
+    new_node->token_type = type;
+    strcpy(new_node->token_alpha_value, value);
+    new_node->left = NULL;
+    new_node->right = NULL;
 
-    temp_node->left = NULL;
-    temp_node->right = NULL;
-
-    if(!(*token_map)) {
-        *token_map = temp_node;
-        return;
-    } 
-    struct AstNode *current_node = *token_map;
-    struct AstNode *parent_node = NULL;
-
-    while(current_node != NULL) {
-        parent_node = current_node;
-
-        if(position < current_node->token_position) {
-            current_node = current_node->left;
-        }
-        else if(position > current_node->token_position) {
-            current_node = current_node->right;
-        }
-        else {
-            free(temp_node);
-            return;
-        }
-    }
-
-    if(position < parent_node->token_position) {
-        parent_node->left = temp_node;
-    }
-    else {
-        parent_node->right = temp_node;
-    }
-
+    return new_node;
 }
+
+void insert_token(struct AstNode **root, const char *token, enum TokenType type) {
+    if (*root == NULL) {
+        *root = create_node(type, token);
+        return;
+    }
+
+    // Insert based on the type of the token
+    if (type == ADDITION || type == MINUS || type == MULTIPLY || type == DIVIDE) {
+        struct AstNode *new_node = create_node(type, token);
+        new_node->left = *root;
+        *root = new_node;
+    } else {
+        // Insert based on alphabetical order for keywords and variables
+        int compareResult = strcmp(token, (*root)->token_alpha_value);
+        if (compareResult < 0) {
+            insert_token(&((*root)->left), token, type);
+        } else if (compareResult > 0) {
+            insert_token(&((*root)->right), token, type);
+        }
+        // Ignore if the token is already in the tree
+    }}
 
 int get_token_position(struct AstNode *root, const char *target_value) {
     if (root == NULL) {
         return -1;
     }
 
-    if (strcmp(root->token_value, target_value) == 0) {
+    if (strcmp(root->token_alpha_value, target_value) == 0) {
         return root->token_position;
     }
 
@@ -105,24 +97,38 @@ int get_token_position(struct AstNode *root, const char *target_value) {
 }
 
 // TODO: build peek_next_token() function that returns the next token whith type enum TokenType or string
-
-void process_ast(struct AstNode *ast_root) {
-    int addition_operator = get_token_position(ast_root, "+"); 
-    int left_integer = get_token_position(ast_root, "10");
-    int right_integer = get_token_position(ast_root, "20");
-
-    if(addition_operator > left_integer) {
-        printf("Left node: '%s' \n", ast_root->left->token_value);
-
-    }
-    if(addition_operator < right_integer) {
-        ast_root->right++;
-    }
-    else {
-        printf("nope!");
+int evaluate_ast(struct AstNode *root) {
+    if (root == NULL) {
+        printf("Error: Cannot evaluate NULL node!\n");
+        return 0;
     }
 
-    printf("Right node: '%s' \n", ast_root->right->token_value);
+    switch (root->token_type) {
+        case INTEGER:
+            return atoi(root->token_alpha_value);
+        case ADDITION:
+            return evaluate_ast(root->left) + evaluate_ast(root->right);
+        case MINUS:
+            return evaluate_ast(root->left) - evaluate_ast(root->right);
+        case MULTIPLY:
+            return evaluate_ast(root->left) * evaluate_ast(root->right);
+        case DIVIDE:
+            return evaluate_ast(root->left) / evaluate_ast(root->right);
+        default:
+            printf("Error: Invalid node type!\n");
+            return 0;
+    }
+}
+
+void free_ast(struct AstNode *node) {
+    if (node == NULL) {
+        return;
+    }
+
+    free_ast(node->left);
+    free_ast(node->right);
+
+    free(node);
 }
 
 void primary() {
@@ -138,41 +144,42 @@ void reset () {
 }
 
 void in_order_traversal(struct AstNode *ast_root) {
-    if(ast_root != NULL) {
-        in_order_traversal(ast_root->left);
-
-        secondary();
-        printf("AST NODE -> token_position: "); 
-
-        primary();
-        printf("( %d ) ", ast_root->token_position);
-
-        secondary();
-        printf(" || ");
-        reset();
-
-        secondary();
-        printf("token_type: "); 
-
-        primary();
-        printf("[ %s ] ", token_type_enum_to_string(ast_root->token_type)); 
-
-        secondary();
-        printf(" || ");
-        reset();
-
-        secondary();
-        printf("token_value: "); 
-
-        primary();
-        printf("[ '%s' ]", ast_root->token_value); 
-
-        secondary();
-        printf("\n");
-        reset();
-
-        in_order_traversal(ast_root->right);
+    if(ast_root == NULL) {
+        return;
     }
+    in_order_traversal(ast_root->left);
+
+    secondary();
+    printf("AST NODE -> token_position: "); 
+
+    primary();
+    printf("( %d ) ", ast_root->token_position);
+
+    secondary();
+    printf(" || ");
+    reset();
+
+    secondary();
+    printf("token_type: "); 
+
+    primary();
+    printf("[ %s ] ", token_type_enum_to_string(ast_root->token_type)); 
+
+    secondary();
+    printf(" || ");
+    reset();
+
+    secondary();
+    printf("token_value: "); 
+
+    primary();
+    printf("[ '%s' ]", ast_root->token_alpha_value); 
+
+    secondary();
+    printf("\n");
+    reset();
+
+    in_order_traversal(ast_root->right);
 }
 
 void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_left) {
@@ -183,7 +190,7 @@ void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_l
         printf("AST NODE: [ token_position: ( %d ) || token_type: ( %s ) || token_value: ( %s )",
                 ast_root->token_position,
                 token_type_enum_to_string(ast_root->token_type),
-                ast_root->token_value);
+                ast_root->token_alpha_value);
 
         if (ast_root->left != NULL || ast_root->right != NULL) {
             printf("\n");

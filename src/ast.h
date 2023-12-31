@@ -23,7 +23,8 @@ enum TokenType {
 };
 
 struct AstNode {
-    char token_value[MAP_SIZE];
+    char token_alpha_value[MAP_SIZE];
+    int token_number_value;
     int token_position;
     enum TokenType token_type;
 
@@ -31,14 +32,23 @@ struct AstNode {
     struct AstNode *right;
 };
 
+struct AstNode* createNumberNode(int value);
+
+
+struct AstNode* createBinaryNode(enum TokenType type, struct AstNode* left, struct AstNode* right);
+
 /*
  * Inserts a token string value, enum TokenType value and token position into each AST node
  * */
-void insert_token(struct AstNode **token_map, const char *token, int token_position, enum TokenType type);
+void insert_token(struct AstNode **token_map, const char *token, enum TokenType type);
 
 int get_token_position(struct AstNode *ast_node, const char *token);
 
-void process_ast(struct AstNode *ast_root);
+int peek_next_token(struct AstNode *ast_root, int token_position);
+
+int evaluate_ast(struct AstNode *ast_root);
+
+void free_ast(struct AstNode *node);
 
 void in_order_traversal(struct AstNode *ast_root);
 

@@ -1,1 +1,2 @@
-void *tokenize(char *file_lines);
+void tokenize(char *file_lines);
+void test();
