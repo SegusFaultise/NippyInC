@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "ast.h"
+#include "color_print.h"
 
 char *token_type_enum_to_string(enum TokenType token_type) {
     if(token_type == NUM_KEYS) {
@@ -75,27 +76,22 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
     int is_operator = (type == ADDITION || type == MULTIPLY || type == DIVIDE || type == MINUS);
     int is_alpha = (type == ALPHA);
     int is_integer = (type == INTEGER);
-    int token_type_is_operator = ((*root)->token_type == ADDITION || (*root)->token_type == MULTIPLY || (*root)->token_type == DIVIDE || (*root)->token_type == MINUS);
+    int token_type_is_operator = ((*root)->token_type == ADDITION || (*root)->token_type == MULTIPLY || 
+                                  (*root)->token_type == DIVIDE || (*root)->token_type == MINUS);
 
     if(is_alpha) {
-        printf("ALPHA\n");
-
         struct AstNode *new_root = create_node(type, token);
 
         new_root->left = *root;
         *root = new_root;
-    } 
+    }
     else if(is_operator) {
-        printf("ADDITION\n");
-
         struct AstNode *new_root = create_node(type, token);
 
         new_root->left = *root;
         *root = new_root;
     }
     else if(is_integer) {
-        printf("INTEGER\n");
-
         if(token_type_is_operator) {
 
             insert_token(&((*root)->right), token, type);
@@ -120,20 +116,25 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
 }
 
 int get_token_position(struct AstNode *root, const char *target_value) {
+    int left_result = get_token_position(root->left, target_value);
+
     if (root == NULL) {
         return -1;
     }
-
     if (strcmp(root->token_alpha_value, target_value) == 0) {
         return root->token_position;
     }
-
-    int left_result = get_token_position(root->left, target_value);
     if (left_result != -1) {
         return left_result;
     }
 
     return get_token_position(root->right, target_value);
+}
+
+void print_arr(int arr[]) {
+    for(int i = 0; i < 1; i++) {
+        printf("Results: [ %d ] \n\n", arr[i]);
+    }
 }
 
 // TODO: build peek_next_token() function that returns the next token whith type enum TokenType or string
@@ -175,53 +176,42 @@ void free_ast(struct AstNode *node) {
     free(node);
 }
 
-void primary() {
-    printf("\033[1;36m");
-}
-
-void secondary() {
-    printf("\033[1;34m");
-}
-
-void reset () {
-    printf("\033[0m");
-}
-
 void in_order_traversal(struct AstNode *ast_root) {
     if(ast_root == NULL) {
         return;
     }
+
     in_order_traversal(ast_root->left);
 
-    secondary();
+    secondary_color();
     printf("AST NODE -> token_position: "); 
 
-    primary();
+    primary_color();
     printf("( %d ) ", ast_root->token_position);
 
-    secondary();
+    secondary_color();
     printf(" || ");
-    reset();
+    reset_color();
 
-    secondary();
+    secondary_color();
     printf("token_type: "); 
 
-    primary();
+    primary_color();
     printf("[ %s ] ", token_type_enum_to_string(ast_root->token_type)); 
 
-    secondary();
+    secondary_color();
     printf(" || ");
-    reset();
+    reset_color();
 
-    secondary();
+    secondary_color();
     printf("token_value: "); 
 
-    primary();
+    primary_color();
     printf("[ '%s' ]", ast_root->token_alpha_value); 
 
-    secondary();
+    secondary_color();
     printf("\n");
-    reset();
+    reset_color();
 
     in_order_traversal(ast_root->right);
 }
@@ -229,12 +219,18 @@ void in_order_traversal(struct AstNode *ast_root) {
 void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_left) {
     if (ast_root != NULL) {
         printf("%s", prefix);
-        printf(is_left ? "├── " : "└── ");
 
+        primary_color();
+        printf(is_left ? "├── " : "└── ");
+        
+        secondary_color();
         printf("AST NODE: [ token_position: ( %d ) || token_type: ( %s ) || token_value: ( %s )",
                 ast_root->token_position,
                 token_type_enum_to_string(ast_root->token_type),
                 ast_root->token_alpha_value);
+        reset_color();
+
+        primary_color();
 
         if (ast_root->left != NULL || ast_root->right != NULL) {
             printf("\n");
@@ -249,4 +245,3 @@ void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_l
         }
     }
 }
-

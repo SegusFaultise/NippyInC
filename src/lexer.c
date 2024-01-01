@@ -99,12 +99,16 @@ void tokenize(char *file_lines) {
         }
     }
 
+    printf("\n");
     in_order_traversal(_ast_node);
+    printf("\n");
+
+    printf("AST TREE\n");
+    print_tree_structure(_ast_node, "", 0);
+    printf("\n");
 
     int result = evaluate_ast(_ast_node);
-    printf("%d \n", result);
-
-    print_tree_structure(_ast_node, "", 0);
+    printf("AST Eval Result: [ %d ] \n\n", result);
 
     free_ast(_ast_node);
 }
