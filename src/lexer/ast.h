@@ -53,4 +53,5 @@ void free_ast(struct AstNode *node);
 void in_order_traversal(struct AstNode *ast_root);
 
 void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_left);
+
 #endif

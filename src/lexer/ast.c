@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #include "ast.h"
-#include "color_print.h"
+#include "../color_print_lib/color_print.h"
 
 char *token_type_enum_to_string(enum TokenType token_type) {
     if(token_type == NUM_KEYS) {

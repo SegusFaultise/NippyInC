@@ -102,3 +102,418 @@ Token Value: [ } ] | Token Type: [ RIGHT_SQUARE_BRACKET ]
 ==31122== 
 ==31122== For lists of detected and suppressed errors, rerun with: -s
 ==31122== ERROR SUMMARY: 32 errors from 5 contexts (suppressed: 0 from 0)
+==21809== Memcheck, a memory error detector
+==21809== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==21809== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==21809== Command: ./nippy
+==21809== 
+==21809== Invalid write of size 1
+==21809==    at 0x484F010: strncpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x109563: extract_alpha (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109649: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa1c21 is 0 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1094C3: extract_alpha (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109649: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Invalid write of size 1
+==21809==    at 0x109577: extract_alpha (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109649: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa1c23 is 2 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1094C3: extract_alpha (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109649: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Invalid read of size 1
+==21809==    at 0x484EE82: strcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x109F80: create_node (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109FD8: insert_token (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109660: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa1c21 is 0 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1094C3: extract_alpha (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109649: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Invalid write of size 1
+==21809==    at 0x484F010: strncpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x109474: extract_number (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1095EE: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa1f31 is 0 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1093FC: extract_number (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1095EE: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Invalid write of size 1
+==21809==    at 0x109488: extract_number (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1095EE: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa1f32 is 1 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1093FC: extract_number (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1095EE: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Invalid read of size 1
+==21809==    at 0x484EE82: strcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x109F80: create_node (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A137: insert_token (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109605: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa1f31 is 0 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1093FC: extract_number (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1095EE: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Invalid read of size 1
+==21809==    at 0x484EE82: strcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x109F80: create_node (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109FD8: insert_token (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A121: insert_token (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109605: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa2241 is 0 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1093FC: extract_number (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1095EE: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Invalid read of size 1
+==21809==    at 0x484EE82: strcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x109F80: create_node (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A092: insert_token (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109660: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==  Address 0x4aa2551 is 0 bytes after a block of size 1 alloc'd
+==21809==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==21809==    by 0x1094C3: extract_alpha (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109649: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DEAD6: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Use of uninitialised value of size 8
+==21809==    at 0x48C22EB: _itoa_word (_itoa.c:177)
+==21809==    by 0x48DDABD: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48C22FC: _itoa_word (_itoa.c:177)
+==21809==    by 0x48DDABD: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DE5C3: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DDC05: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DEAD6: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A5EE: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DE5C3: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A5EE: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DDC05: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A5EE: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A492: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DEAD6: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1098E0: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DE5C3: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1098E0: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DDC05: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A4DA: in_order_traversal (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1098E0: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+
+main 0/n
+
+< ../main.nip >
+-------------
+add = 10 + 10;
+
+minus = 5 - 2;
+
+divide = 10 / 2;
+
+multiply = 2 * 10;
+-------------
+
+[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ASSIGN ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '=' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ALPHA ] [1;35m || [0m[1;35mtoken_value: [1;33m[ 'add' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '10' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ADDITION ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '+' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '10' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ END_OF_LINE ] [1;35m || [0m[1;35mtoken_value: [1;33m[ ';' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ASSIGN ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '=' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ALPHA ] [1;35m || [0m[1;35mtoken_value: [1;33m[ 'minus' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '5' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ MINUS ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '-' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '2' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ END_OF_LINE ] [1;35m || [0m[1;35mtoken_value: [1;33m[ ';' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ASSIGN ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '=' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ALPHA ] [1;35m || [0m[1;35mtoken_value: [1;33m[ 'divide' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '10' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ DIVIDE ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '/' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '2' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ END_OF_LINE ] [1;35m || [0m[1;35mtoken_value: [1;33m[ ';' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ASSIGN ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '=' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ ALPHA ] [1;35m || [0m[1;35mtoken_value: [1;33m[ 'multiply' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '2' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ MULTIPLY ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '*' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ INTEGER ] [1;35m || [0m[1;35mtoken_value: [1;33m[ '10' ][1;35m
+[0m[1;35mAST NODE -> token_position: [1;33m( 0 ) [1;35m || [0m[1;35mtoken_type: [1;33m[ END_OF_LINE ] [1;35m || [0m[1;35mtoken_value: [1;33m[ ';' ][1;35m
+[0m
+AST TREE
+[1;33m└── [1;35mAST NODE: [ token_positi==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DEAD6: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Use of uninitialised value of size 8
+==21809==    at 0x48C22EB: _itoa_word (_itoa.c:177)
+==21809==    by 0x48DDABD: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48C22FC: _itoa_word (_itoa.c:177)
+==21809==    by 0x48DDABD: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DE5C3: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DDC05: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DEAD6: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DE5C3: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DDC05: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x109917: tokenize (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x1093C2: main (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DEAD6: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A7A8: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DE5C3: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A7A8: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+==21809== Conditional jump or move depends on uninitialised value(s)
+==21809==    at 0x48DDC05: __vfprintf_internal (vfprintf-internal.c:1516)
+==21809==    by 0x48C879E: printf (printf.c:33)
+==21809==    by 0x10A6D0: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A7A8: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809==    by 0x10A783: print_tree_structure (in /home/neural_nuts/Projects/Nippy/src/build/nippy)
+==21809== 
+on: ( 0 ) || token_type: ( MULTIPLY ) || token_value: ( * )[0m[1;33m
+    [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 2 )[0m[1;33m
+    │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ALPHA ) || token_value: ( multiply )[0m[1;33m
+    │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( DIVIDE ) || token_value: ( / )[0m[1;33m
+    │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 10 )[0m[1;33m
+    │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ALPHA ) || token_value: ( divide )[0m[1;33m
+    │   │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( MINUS ) || token_value: ( - )[0m[1;33m
+    │   │   │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 5 )[0m[1;33m
+    │   │   │   │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ALPHA ) || token_value: ( minus )[0m[1;33m
+    │   │   │   │   │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ADDITION ) || token_value: ( + )[0m[1;33m
+    │   │   │   │   │   │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 10 )[0m[1;33m
+    │   │   │   │   │   │   │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ALPHA ) || token_value: ( add )[0m[1;33m
+    │   │   │   │   │   │   │   │   │   │   │   [1;33m├── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ASSIGN ) || token_value: ( = )[0m[1;33m ]
+    │   │   │   │   │   │   │   │   │   [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 10 )[0m[1;33m
+    │   │   │   │   │   │   │   │   │       [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( END_OF_LINE ) || token_value: ( ; )[0m[1;33m
+    │   │   │   │   │   │   │   │   │           [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ASSIGN ) || token_value: ( = )[0m[1;33m ]
+    │   │   │   │   │   │   [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 2 )[0m[1;33m
+    │   │   │   │   │   │       [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( END_OF_LINE ) || token_value: ( ; )[0m[1;33m
+    │   │   │   │   │   │           [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ASSIGN ) || token_value: ( = )[0m[1;33m ]
+    │   │   │   [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 2 )[0m[1;33m
+    │   │   │       [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( END_OF_LINE ) || token_value: ( ; )[0m[1;33m
+    │   │   │           [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( ASSIGN ) || token_value: ( = )[0m[1;33m ]
+    [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( INTEGER ) || token_value: ( 10 )[0m[1;33m
+        [1;33m└── [1;35mAST NODE: [ token_position: ( 0 ) || token_type: ( END_OF_LINE ) || token_value: ( ; )[0m[1;33m ]
+
+AST Eval Result: [ 20 ] 
+
+==21809== 
+==21809== HEAP SUMMARY:
+==21809==     in use at exit: 25,612 bytes in 13 blocks
+==21809==   total heap usage: 47 allocs, 34 frees, 66,588 bytes allocated
+==21809== 
+==21809== LEAK SUMMARY:
+==21809==    definitely lost: 25,612 bytes in 13 blocks
+==21809==    indirectly lost: 0 bytes in 0 blocks
+==21809==      possibly lost: 0 bytes in 0 blocks
+==21809==    still reachable: 0 bytes in 0 blocks
+==21809==         suppressed: 0 bytes in 0 blocks
+==21809== Rerun with --leak-check=full to see details of leaked memory
+==21809== 
+==21809== Use --track-origins=yes to see where uninitialised values come from
+==21809== For lists of detected and suppressed errors, rerun with: -s
+==21809== ERROR SUMMARY: 308 errors from 30 contexts (suppressed: 0 from 0)

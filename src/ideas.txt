@@ -1,2 +1,0 @@
-1. "nipit" as run command for main.nip
-

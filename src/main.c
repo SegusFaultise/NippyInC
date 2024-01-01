@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "file_functions.h"
-#include "lexer.h"
+#include "file_functions_lib/file_functions.h"
+#include "lexer/tokenizer.h"
 
 int main() {
     printf("\nmain 0/n\n\n");
