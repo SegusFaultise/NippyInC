@@ -8,6 +8,7 @@ include_directories(include)
 
 add_executable(nippy ${CMAKE_CURRENT_SOURCE_DIR}/main.c
                      ${CMAKE_CURRENT_SOURCE_DIR}/lexer/tokenizer.c
+                     ${CMAKE_CURRENT_SOURCE_DIR}/tests/lexer_tests.c
                      ${CMAKE_CURRENT_SOURCE_DIR}/file_functions_lib/file_functions.c
                      ${CMAKE_CURRENT_SOURCE_DIR}/color_print_lib/color_print.c
                      ${CMAKE_CURRENT_SOURCE_DIR}/lexer/variable_map.c

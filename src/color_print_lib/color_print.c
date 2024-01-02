@@ -9,7 +9,7 @@ void tree_color() {
 }
 
 void error_color() {
-    printf("\033[1;31m]");
+    printf("\033[1;31m");
 }
 
 void secondary_color() {

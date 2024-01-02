@@ -20,6 +20,7 @@ char *remove_spaces(char *str){
             j++;
         }
     }
+
     str[j] = '\0';
     
     return str;
@@ -29,17 +30,27 @@ char *file_reader(char file_path[]) {
     int buffer_size = 200;
     FILE *fp = fopen(file_path, "r");
 
-    if (fp == NULL) {
-        printf("Error, file is NULL");
+    if(file_path == NULL) {
+        printf("File not found!");
+
         return NULL;
     }
+
+    if (fp == NULL) {
+        printf("Error, file is NULL");
+
+        return NULL;
+    }
+
     char *file_lines = malloc(buffer_size * sizeof(char));
 
     if (file_lines == NULL) {
         perror("Memory allocation error");
         fclose(fp);
+
         return NULL;
     }
+
     size_t total_size = 0;
     char *line;
 
@@ -66,6 +77,4 @@ char *file_reader(char file_path[]) {
     print_file(file_lines, file_path);
 
     return file_lines;
-
-    free(file_lines);
 }
