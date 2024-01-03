@@ -13,28 +13,37 @@
 #define PASSED "passed"
 #define FAILED "failed"
 
-void print_test(char *test_name, char test_result[TEST_RESULT_SIZE]) {
+void print_test(const char *test_name, char test_result[TEST_RESULT_SIZE]) {
+    char *temp_string = (char *) malloc(50);
+
     primary_color();
-    printf("TEST: ");
+    printf("[TEST]: ");
     reset_color();
     
     secondary_color();
-    printf("%s", test_name);
+    printf("%s", strcpy(temp_string, test_name));
     reset_color();
 
     primary_color();
-    printf(" RESULT: ");
+    printf(" [RESULT]: ");
     reset_color();
 
     if(strcmp(test_result, PASSED) == 0) {
         tree_color();
-        printf("%s \n", test_result);
+        printf("%s \n", PASSED);
         reset_color();
+
+        free(temp_string);
+    }
+    else if(strcmp(test_result, FAILED) == 0) {
+        error_color();
+        printf("%s \n", FAILED);
+        reset_color();
+
+        free(temp_string);
     }
     else {
-        error_color();
-        printf("%s \n", test_result);
-        reset_color();
+        free(temp_string);
     }
 }
 
@@ -45,42 +54,170 @@ void tokenizer_test(){
 }
 
 void add_operator_single_digits_test(struct AstNode *ast_root) {
+    int result = 1 + 1;
 
     insert_token(&ast_root, "1", INTEGER);
     insert_token(&ast_root, "+", ADDITION);
     insert_token(&ast_root, "1", INTEGER);
 
-    if(evaluate_ast(ast_root) == 2) {
-        print_test("add_operator_single_digits_test", PASSED); 
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED); 
     }
-    if(evaluate_ast(ast_root) != 2) {
-        print_test("add_operator", FAILED);
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
     }
 }
 
 void add_operator_multi_digits_test(struct AstNode *ast_root) {
+    int result = 15 + 15;
+
     insert_token(&ast_root, "15", INTEGER);
     insert_token(&ast_root, "+", ADDITION);
     insert_token(&ast_root, "15", INTEGER);
 
-    if(evaluate_ast(ast_root) == 30) {
-        print_test("add_operator_multi_digits_test", PASSED);
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
     }
-    if(evaluate_ast(ast_root) != 30) {
-        print_test("add_operator", FAILED);
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
     }
 }
 
 void minus_operator_single_digits_test(struct AstNode *ast_root) {
+    int result = 3 - 2;
+
+    insert_token(&ast_root, "3", INTEGER);
+    insert_token(&ast_root, "-", MINUS);
+    insert_token(&ast_root, "2", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+}
+
+void minus_operator_multi_digits_test(struct AstNode *ast_root) {
+    int result = 10 - 5;
+
     insert_token(&ast_root, "10", INTEGER);
     insert_token(&ast_root, "-", MINUS);
     insert_token(&ast_root, "5", INTEGER);
 
-    if(evaluate_ast(ast_root) == 5) {
-        print_test("add_operator_multi_digits_test", PASSED);
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
     }
-    if(evaluate_ast(ast_root) != 5) {
-        print_test("add_operator", FAILED);
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+}
+
+void multiply_operator_single_digits_test(struct AstNode *ast_root) {
+    int result = 2 * 2;
+
+    insert_token(&ast_root, "2", INTEGER);
+    insert_token(&ast_root, "*", MULTIPLY);
+    insert_token(&ast_root, "2", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+}
+
+void multiply_operator_multi_digits_test(struct AstNode *ast_root) {
+    int result = 12 * 12;
+
+    insert_token(&ast_root, "12", INTEGER);
+    insert_token(&ast_root, "*", MULTIPLY);
+    insert_token(&ast_root, "12", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+}
+
+void divide_operator_single_digits_test(struct AstNode *ast_root) {
+    int result = 8 / 4;
+
+    insert_token(&ast_root, "8", INTEGER);
+    insert_token(&ast_root, "/", DIVIDE);
+    insert_token(&ast_root, "4", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+}
+
+void divide_operator_multi_digits_test(struct AstNode *ast_root) {
+    int result = 32 / 12;
+
+    insert_token(&ast_root, "32", INTEGER);
+    insert_token(&ast_root, "/", DIVIDE);
+    insert_token(&ast_root, "12", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+}
+
+void all_math_operators_single_digits_test(struct AstNode *ast_root) {
+    int result = 5 + 5 - 5 * 2 / 2;
+
+    insert_token(&ast_root, "5", INTEGER);
+    insert_token(&ast_root, "+", ADDITION);
+    insert_token(&ast_root, "5", INTEGER);
+    insert_token(&ast_root, "-", MINUS);
+    insert_token(&ast_root, "5", INTEGER);
+    insert_token(&ast_root, "*", MULTIPLY);
+    insert_token(&ast_root, "2", INTEGER);
+    insert_token(&ast_root, "/", DIVIDE);
+    insert_token(&ast_root, "2", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+}
+
+void all_math_operators_multi_digits_test(struct AstNode *ast_root) {
+    /*
+     * (!) C has a diffrent order of operations
+     *
+     * this test has been tested with a calculator
+     * int result = 15 + 15 - 12 * 10 / 32;
+     *
+     */
+
+    insert_token(&ast_root, "15", INTEGER);
+    insert_token(&ast_root, "+", ADDITION);
+    insert_token(&ast_root, "15", INTEGER);
+    insert_token(&ast_root, "-", MINUS);
+    insert_token(&ast_root, "12", INTEGER);
+    insert_token(&ast_root, "*", MULTIPLY);
+    insert_token(&ast_root, "32", INTEGER);
+    insert_token(&ast_root, "/", DIVIDE);
+    insert_token(&ast_root, "10", INTEGER);
+
+    if(evaluate_ast(ast_root) == 57) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != 57) {
+        print_test(__func__, FAILED);
     }
 }
 
@@ -88,11 +225,23 @@ int run_tests() {
     struct AstNode *ast_root = NULL;
 
     //tokenizer_test();
+
     add_operator_single_digits_test(ast_root);
     add_operator_multi_digits_test(ast_root);
-    minus_operator_single_digits_test(ast_root);
 
-    //free_ast(ast_root);
+    minus_operator_single_digits_test(ast_root);
+    minus_operator_multi_digits_test(ast_root);
+
+    multiply_operator_single_digits_test(ast_root);
+    multiply_operator_multi_digits_test(ast_root);
+
+    divide_operator_single_digits_test(ast_root);
+    divide_operator_multi_digits_test(ast_root);
+
+    all_math_operators_single_digits_test(ast_root);
+    all_math_operators_multi_digits_test(ast_root);
+
+    free_ast(ast_root);
 
     printf("\n");
 
