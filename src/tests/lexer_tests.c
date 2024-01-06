@@ -21,11 +21,11 @@ void print_test(const char *test_name, char test_result[TEST_RESULT_SIZE]) {
     reset_color();
 
     secondary_color();
-    printf(" %s ", strcpy(temp_string, test_name));
+    printf("%s\t\t\t\t", strcpy(temp_string, test_name));
     reset_color();
 
     primary_color();
-    printf("\t[RESULT]:  ");
+    printf("[RESULT]: ");
     reset_color();
 
     if(strcmp(test_result, PASSED) == 0) {
@@ -53,7 +53,7 @@ void tokenizer_test(){
     tokenize(nip_file);
 }
 
-void add_operator_single_digits_test(struct AstNode *ast_root) {
+void addition_operation_single_digits_test(struct AstNode *ast_root) {
     int result = 1 + 1;
 
     insert_token(&ast_root, "1", INTEGER);
@@ -68,7 +68,7 @@ void add_operator_single_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void add_operator_multi_digits_test(struct AstNode *ast_root) {
+void addition_operation_multi_digits_test(struct AstNode *ast_root) {
     int result = 15 + 15;
 
     insert_token(&ast_root, "15", INTEGER);
@@ -83,7 +83,7 @@ void add_operator_multi_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void minus_operator_single_digits_test(struct AstNode *ast_root) {
+void minus_operation_single_digits_test(struct AstNode *ast_root) {
     int result = 3 - 2;
 
     insert_token(&ast_root, "3", INTEGER);
@@ -98,7 +98,7 @@ void minus_operator_single_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void minus_operator_multi_digits_test(struct AstNode *ast_root) {
+void minus_operation_multi_digits_test(struct AstNode *ast_root) {
     int result = 10 - 5;
 
     insert_token(&ast_root, "10", INTEGER);
@@ -113,7 +113,7 @@ void minus_operator_multi_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void multiply_operator_single_digits_test(struct AstNode *ast_root) {
+void multiply_operation_single_digits_test(struct AstNode *ast_root) {
     int result = 2 * 2;
 
     insert_token(&ast_root, "2", INTEGER);
@@ -128,7 +128,7 @@ void multiply_operator_single_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void multiply_operator_multi_digits_test(struct AstNode *ast_root) {
+void multiply_operation_multi_digits_test(struct AstNode *ast_root) {
     int result = 12 * 12;
 
     insert_token(&ast_root, "12", INTEGER);
@@ -143,7 +143,7 @@ void multiply_operator_multi_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void divide_operator_single_digits_test(struct AstNode *ast_root) {
+void divide_operation_single_digits_test(struct AstNode *ast_root) {
     int result = 8 / 4;
 
     insert_token(&ast_root, "8", INTEGER);
@@ -158,7 +158,7 @@ void divide_operator_single_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void divide_operator_multi_digits_test(struct AstNode *ast_root) {
+void divide_operation_multi_digits_test(struct AstNode *ast_root) {
     int result = 32 / 12;
 
     insert_token(&ast_root, "32", INTEGER);
@@ -173,7 +173,7 @@ void divide_operator_multi_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void all_math_operators_single_digits_test(struct AstNode *ast_root) {
+void all_math_operations_single_digits_test(struct AstNode *ast_root) {
     int result = 5 + 5 - 5 * 2 / 2;
 
     insert_token(&ast_root, "5", INTEGER);
@@ -194,7 +194,7 @@ void all_math_operators_single_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void all_math_operators_multi_digits_test(struct AstNode *ast_root) {
+void all_math_operations_multi_digits_test(struct AstNode *ast_root) {
     /*
      * (!) C has a diffrent order of operations
      *
@@ -221,12 +221,31 @@ void all_math_operators_multi_digits_test(struct AstNode *ast_root) {
     }
 }
 
-void operator_operation_with_alpha_prefix(struct AstNode *ast_root) {
-    int result = 2 + 2;
+void alpha_prefix_for_addition_operations_test(struct AstNode *ast_root) {
+    int result = 4 + 2;
 
     insert_token(&ast_root, "var_name", ALPHA);
-    insert_token(&ast_root, "2", INTEGER);
+    insert_token(&ast_root, "=", ASSIGN);
+    insert_token(&ast_root, "4", INTEGER);
     insert_token(&ast_root, "+", ADDITION);
+    insert_token(&ast_root, "2", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+
+}
+
+void alpha_prefix_for_minus_operations_test(struct AstNode *ast_root) {
+    int result = 10 - 2;
+
+    insert_token(&ast_root, "var_name", ALPHA);
+    insert_token(&ast_root, "=", ASSIGN);
+    insert_token(&ast_root, "10", INTEGER);
+    insert_token(&ast_root, "-", MINUS);
     insert_token(&ast_root, "2", INTEGER);
 
     if(evaluate_ast(ast_root) == result) {
@@ -243,22 +262,23 @@ int run_tests() {
 
     tokenizer_test();
 
-    add_operator_single_digits_test(ast_root);
-    add_operator_multi_digits_test(ast_root);
+    addition_operation_single_digits_test(ast_root);
+    addition_operation_multi_digits_test(ast_root);
 
-    minus_operator_single_digits_test(ast_root);
-    minus_operator_multi_digits_test(ast_root);
+    minus_operation_single_digits_test(ast_root);
+    minus_operation_multi_digits_test(ast_root);
 
-    multiply_operator_single_digits_test(ast_root);
-    multiply_operator_multi_digits_test(ast_root);
+    multiply_operation_single_digits_test(ast_root);
+    multiply_operation_multi_digits_test(ast_root);
 
-    divide_operator_single_digits_test(ast_root);
-    divide_operator_multi_digits_test(ast_root);
+    divide_operation_single_digits_test(ast_root);
+    divide_operation_multi_digits_test(ast_root);
 
-    all_math_operators_single_digits_test(ast_root);
-    all_math_operators_multi_digits_test(ast_root);
+    all_math_operations_single_digits_test(ast_root);
+    all_math_operations_multi_digits_test(ast_root);
 
-    operator_operation_with_alpha_prefix(ast_root);
+    alpha_prefix_for_addition_operations_test(ast_root);
+    alpha_prefix_for_minus_operations_test(ast_root);
 
     free_ast(ast_root);
 
