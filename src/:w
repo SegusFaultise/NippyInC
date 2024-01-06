@@ -78,7 +78,6 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
     while (*root != NULL) {
         int is_operator = (type == ADDITION || type == MULTIPLY || type == DIVIDE || type == MINUS);
         int is_alpha = (type == ALPHA);
-        int is_assign = (type == ASSIGN);
         int is_integer = (type == INTEGER);
         int token_type_is_operator = ((*root)->token_type == ADDITION || (*root)->token_type == MULTIPLY ||
                 (*root)->token_type == DIVIDE || (*root)->token_type == MINUS);
@@ -91,20 +90,9 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
 
             return;
         }
-        else if (((*root))->token_type == ALPHA) {
+        if (((*root))->token_type == ALPHA) {
             root = &((*root)->right);
         }
-        else if(is_assign) {
-            struct AstNode *new_root = create_node(type, token);
-
-            new_root->left = *root;
-            *root = new_root;
-
-            return;
-        }
-        else if (((*root))->token_type == ASSIGN) {
-            root = &((*root)->right);
-        } 
         else if(is_operator) {
             struct AstNode *new_root = create_node(type, token);
 
@@ -160,15 +148,21 @@ int get_token_position(struct AstNode *root, const char *target_value) {
     return get_token_position(root->right, target_value);
 }
 
-int evaluate_ast(struct AstNode *root) {
-    struct VariableMap variable_map[MAP_SIZE];
-    int result = 0;
+void print_arr(int arr[]) {
+    for(int i = 0; i < 1; i++) {
+        printf("Results: [ %d ] \n\n", arr[i]);
+    }
+}
 
+int evaluate_ast(struct AstNode *root) {
     if (root == NULL) {
         printf("Error: Cannot evaluate NULL node!\n");
         return 0;
     } 
     else {
+        struct VariableMap variable_map[] = NULL;
+        int result = 0;
+
         switch (root->token_type) {
             case INTEGER:
                 result = atoi(root->token_alpha_value);
@@ -186,13 +180,11 @@ int evaluate_ast(struct AstNode *root) {
                 result = evaluate_ast(root->left) / evaluate_ast(root->right);
                 break;
             case ALPHA:
-                evaluate_ast(root->right);
-                insert_variable(variable_map, root->token_alpha_value, result);
+                insert_variable(, const char *variable_name, int variable_value_int)
+                break;
         }
+        return result;
     }
-    print_variable_map(variable_map);
-
-    return result;
 }
 
 void free_ast(struct AstNode *node) {

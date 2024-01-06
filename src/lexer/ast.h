@@ -50,6 +50,8 @@ int evaluate_ast(struct AstNode *ast_root);
 
 void free_ast(struct AstNode *node);
 
+void print_tree(struct AstNode *root, enum TokenType type);
+
 void in_order_traversal(struct AstNode *ast_root);
 
 void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_left);

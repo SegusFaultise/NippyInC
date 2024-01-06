@@ -14,30 +14,30 @@
 #define FAILED "failed"
 
 void print_test(const char *test_name, char test_result[TEST_RESULT_SIZE]) {
-    char *temp_string = (char *) malloc(50);
-
+    char *temp_string = malloc(strlen(test_name) + 1);
+    
     primary_color();
     printf("[TEST]: ");
     reset_color();
-    
+
     secondary_color();
-    printf("%s", strcpy(temp_string, test_name));
+    printf(" %s ", strcpy(temp_string, test_name));
     reset_color();
 
     primary_color();
-    printf(" [RESULT]: ");
+    printf("\t[RESULT]:  ");
     reset_color();
 
     if(strcmp(test_result, PASSED) == 0) {
         tree_color();
-        printf("%s \n", PASSED);
+        printf("%s\n", PASSED);
         reset_color();
 
         free(temp_string);
     }
     else if(strcmp(test_result, FAILED) == 0) {
         error_color();
-        printf("%s \n", FAILED);
+        printf("%s\n", FAILED);
         reset_color();
 
         free(temp_string);
@@ -48,7 +48,7 @@ void print_test(const char *test_name, char test_result[TEST_RESULT_SIZE]) {
 }
 
 void tokenizer_test(){
-    char *nip_file = file_reader("../tests/add_operator_test.nip");
+    char *nip_file = file_reader("../tests/test_file.nip");
 
     tokenize(nip_file);
 }
@@ -221,10 +221,27 @@ void all_math_operators_multi_digits_test(struct AstNode *ast_root) {
     }
 }
 
+void operator_operation_with_alpha_prefix(struct AstNode *ast_root) {
+    int result = 2 + 2;
+
+    insert_token(&ast_root, "var_name", ALPHA);
+    insert_token(&ast_root, "2", INTEGER);
+    insert_token(&ast_root, "+", ADDITION);
+    insert_token(&ast_root, "2", INTEGER);
+
+    if(evaluate_ast(ast_root) == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result) {
+        print_test(__func__, FAILED);
+    }
+
+}
+
 int run_tests() {
     struct AstNode *ast_root = NULL;
 
-    //tokenizer_test();
+    tokenizer_test();
 
     add_operator_single_digits_test(ast_root);
     add_operator_multi_digits_test(ast_root);
@@ -240,6 +257,8 @@ int run_tests() {
 
     all_math_operators_single_digits_test(ast_root);
     all_math_operators_multi_digits_test(ast_root);
+
+    operator_operation_with_alpha_prefix(ast_root);
 
     free_ast(ast_root);
 

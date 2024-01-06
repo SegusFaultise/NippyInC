@@ -5,10 +5,9 @@
 #include "tests/lexer_tests.h"
 
 int main() {
-    printf("\nmain 0/n\n\n");
+    printf("\nRunning from main.c ...\n\n");
 
     //char *file_lines = file_reader("../main.nip");
-
     //tokenize(file_lines);
 
     run_tests();
