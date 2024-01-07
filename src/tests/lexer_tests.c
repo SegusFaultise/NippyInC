@@ -7,6 +7,7 @@
 #include "../lexer/ast.h"
 #include "../file_functions_lib/file_functions.h"
 #include "../color_print_lib/color_print.h"
+#include "../lexer/variable_map.h"
 
 #define TEST_RESULT_SIZE 7
 
@@ -257,8 +258,49 @@ void alpha_prefix_for_minus_operations_test(struct AstNode *ast_root) {
 
 }
 
+void variable_value_from_addition_operation_test(struct AstNode *ast_root, struct VariableMap variable_map[]) {
+    int result = 40 + 60;
+
+    insert_token(&ast_root, "number_one_add", ALPHA);
+    insert_token(&ast_root, "=", ASSIGN);
+    insert_token(&ast_root, "40", INTEGER);
+    insert_token(&ast_root, "+", ADDITION);
+    insert_token(&ast_root, "60", INTEGER);
+
+    int variable_value = insert_variable(variable_map, "var_name_add", evaluate_ast(ast_root));
+    
+    if(evaluate_ast(ast_root) == result && variable_value == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result && variable_value != result) {
+        print_test(__func__, FAILED);
+    }
+
+}
+
+void variable_value_from_minus_operation_test(struct AstNode *ast_root, struct VariableMap variable_map[]) {
+    int result = 30 - 10;
+
+    insert_token(&ast_root, "number_one_add", ALPHA);
+    insert_token(&ast_root, "=", ASSIGN);
+    insert_token(&ast_root, "30", INTEGER);
+    insert_token(&ast_root, "-", MINUS);
+    insert_token(&ast_root, "10", INTEGER);
+
+    int variable_value = insert_variable(variable_map, "var_name_minus", evaluate_ast(ast_root));
+    
+    if(evaluate_ast(ast_root) == result && variable_value == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result && variable_value != result) {
+        print_test(__func__, FAILED);
+    }
+
+}
+
 int run_tests() {
     struct AstNode *ast_root = NULL;
+    struct VariableMap variable_map[MAP_SIZE];
 
     tokenizer_test();
 
@@ -279,6 +321,11 @@ int run_tests() {
 
     alpha_prefix_for_addition_operations_test(ast_root);
     alpha_prefix_for_minus_operations_test(ast_root);
+
+    variable_value_from_addition_operation_test(ast_root, variable_map);
+    variable_value_from_minus_operation_test(ast_root, variable_map);
+
+    print_variable_map(variable_map);
 
     free_ast(ast_root);
 

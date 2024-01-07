@@ -161,7 +161,6 @@ int get_token_position(struct AstNode *root, const char *target_value) {
 }
 
 int evaluate_ast(struct AstNode *root) {
-    struct VariableMap variable_map[MAP_SIZE];
     int result = 0;
 
     if (root == NULL) {
@@ -187,8 +186,6 @@ int evaluate_ast(struct AstNode *root) {
                 break;
             case ALPHA:
                 result = evaluate_ast(root->right);
-                insert_variable(variable_map, root->token_alpha_value, result);
-                //print_variable_map(variable_map);
                 break;
             case ASSIGN:
                 result = evaluate_ast(root->right);
@@ -279,14 +276,23 @@ void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_l
     if (ast_root != NULL) {
         printf("%s", prefix);
 
-        primary_color();
+        secondary_color();
         printf(is_left ? "├── " : "└── ");
 
+        primary_color();
+        printf("NODE >> [TOKEN_TYPE]:");
+        reset_color();
+
         secondary_color();
-        printf("AST NODE: [ token_position: ( %d ) || token_type: ( %s ) || token_value: ( %s )",
-                ast_root->token_position,
-                token_type_enum_to_string(ast_root->token_type),
-                ast_root->token_alpha_value);
+        printf(" %s", token_type_enum_to_string(ast_root->token_type));
+        reset_color();
+        
+        primary_color();
+        printf(", [TOKEN_VALUE]:");
+        reset_color();
+
+        secondary_color();
+        printf(" '%s' ", ast_root->token_alpha_value);
         reset_color();
 
         primary_color();
@@ -300,7 +306,7 @@ void print_tree_structure(struct AstNode *ast_root, const char *prefix, int is_l
             print_tree_structure(ast_root->left, new_prefix, 1);
             print_tree_structure(ast_root->right, new_prefix, 0);
         } else {
-            printf(" ]\n");
+            printf("\n");
         }
     }
 }

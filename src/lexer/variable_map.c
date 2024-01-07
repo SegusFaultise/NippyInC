@@ -11,14 +11,16 @@ void initialize_variable_map(struct VariableMap variable_map[]) {
     }
 }
 
-void insert_variable(struct VariableMap variable_map[], const char *variable_name, int variable_value_int) {
+int insert_variable(struct VariableMap variable_map[], const char *variable_name, int variable_value_int) {
     for(int i = 0; i < MAP_SIZE; i++) {
         if (strcmp(variable_map[i].variable_name, "") == 0) {
             strcpy(variable_map[i].variable_name, variable_name);
             variable_map[i].variable_value_int = variable_value_int;
-            break;  // Break after inserting the variable
+
+            return variable_map[i].variable_value_int;
         }
     }
+    return 0;
 }
 
 void print_variable_map(struct VariableMap variable_map[]) {

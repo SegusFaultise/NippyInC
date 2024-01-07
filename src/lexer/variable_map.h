@@ -10,7 +10,7 @@ struct VariableMap {
 
 void initialize_variable_map(struct VariableMap variable_map[]);
 
-void insert_variable(struct VariableMap variable_map[], const char *variable_name, int variable_value_int);
+int insert_variable(struct VariableMap variable_map[], const char *variable_name, int variable_value_int);
 
 void print_variable_map(struct VariableMap variable_map[]);
 
