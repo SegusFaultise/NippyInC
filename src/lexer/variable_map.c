@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "variable_map.h"
+#include "../color_print_lib/color_print.h"
 
 void initialize_variable_map(struct VariableMap variable_map[]) {
     for(int i = 0; i < MAP_SIZE ; i++) {
@@ -25,6 +26,22 @@ int insert_variable(struct VariableMap variable_map[], const char *variable_name
 
 void print_variable_map(struct VariableMap variable_map[]) {
     for(int i = 0; i < MAP_SIZE && strcmp(variable_map[i].variable_name, "") != 0; i++) {
-        printf("Var name: [ %s ], || Var int value: [ %d ]\n", variable_map[i].variable_name, variable_map[i].variable_value_int);
+        primary_color();
+        printf("[VARIABLE_NAME]: ");
+        reset_color();
+
+        secondary_color();
+        printf("%s, ", variable_map[i].variable_name);
+        reset_color();
+
+        primary_color();
+        printf("[VARIABLE_VALUE]: ");
+        reset_color();
+
+        secondary_color();
+        printf("%d", variable_map[i].variable_value_int);
+        reset_color();
+
+        printf("\n");
     }
 }

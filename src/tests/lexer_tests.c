@@ -259,13 +259,13 @@ void alpha_prefix_for_minus_operations_test(struct AstNode *ast_root) {
 }
 
 void variable_value_from_addition_operation_test(struct AstNode *ast_root, struct VariableMap variable_map[]) {
-    int result = 40 + 60;
+    int result = 42 + 66;
 
     insert_token(&ast_root, "number_one_add", ALPHA);
     insert_token(&ast_root, "=", ASSIGN);
-    insert_token(&ast_root, "40", INTEGER);
+    insert_token(&ast_root, "42", INTEGER);
     insert_token(&ast_root, "+", ADDITION);
-    insert_token(&ast_root, "60", INTEGER);
+    insert_token(&ast_root, "66", INTEGER);
 
     int variable_value = insert_variable(variable_map, "var_name_add", evaluate_ast(ast_root));
     
@@ -279,13 +279,13 @@ void variable_value_from_addition_operation_test(struct AstNode *ast_root, struc
 }
 
 void variable_value_from_minus_operation_test(struct AstNode *ast_root, struct VariableMap variable_map[]) {
-    int result = 30 - 10;
+    int result = 24 - 12;
 
     insert_token(&ast_root, "number_one_add", ALPHA);
     insert_token(&ast_root, "=", ASSIGN);
-    insert_token(&ast_root, "30", INTEGER);
+    insert_token(&ast_root, "24", INTEGER);
     insert_token(&ast_root, "-", MINUS);
-    insert_token(&ast_root, "10", INTEGER);
+    insert_token(&ast_root, "12", INTEGER);
 
     int variable_value = insert_variable(variable_map, "var_name_minus", evaluate_ast(ast_root));
     
@@ -297,6 +297,47 @@ void variable_value_from_minus_operation_test(struct AstNode *ast_root, struct V
     }
 
 }
+
+void variable_value_from_multiply_operation_test(struct AstNode *ast_root, struct VariableMap variable_map[]) {
+    int result = 32 * 14;
+
+    insert_token(&ast_root, "number_one_add", ALPHA);
+    insert_token(&ast_root, "=", ASSIGN);
+    insert_token(&ast_root, "32", INTEGER);
+    insert_token(&ast_root, "*", MULTIPLY);
+    insert_token(&ast_root, "14", INTEGER);
+
+    int variable_value = insert_variable(variable_map, "var_name_multiply", evaluate_ast(ast_root));
+    
+    if(evaluate_ast(ast_root) == result && variable_value == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result && variable_value != result) {
+        print_test(__func__, FAILED);
+    }
+
+}
+
+void variable_value_from_divide_operation_test(struct AstNode *ast_root, struct VariableMap variable_map[]) {
+    int result = 24 / 3;
+
+    insert_token(&ast_root, "number_one_add", ALPHA);
+    insert_token(&ast_root, "=", ASSIGN);
+    insert_token(&ast_root, "24", INTEGER);
+    insert_token(&ast_root, "/", DIVIDE);
+    insert_token(&ast_root, "3", INTEGER);
+
+    int variable_value = insert_variable(variable_map, "var_name_divide", evaluate_ast(ast_root));
+    
+    if(evaluate_ast(ast_root) == result && variable_value == result) {
+        print_test(__func__, PASSED);
+    }
+    else if(evaluate_ast(ast_root) != result && variable_value != result) {
+        print_test(__func__, FAILED);
+    }
+
+}
+
 
 int run_tests() {
     struct AstNode *ast_root = NULL;
@@ -324,7 +365,10 @@ int run_tests() {
 
     variable_value_from_addition_operation_test(ast_root, variable_map);
     variable_value_from_minus_operation_test(ast_root, variable_map);
+    variable_value_from_multiply_operation_test(ast_root, variable_map);
+    variable_value_from_divide_operation_test(ast_root, variable_map);
 
+    printf("\n");
     print_variable_map(variable_map);
 
     free_ast(ast_root);

@@ -161,7 +161,10 @@ int get_token_position(struct AstNode *root, const char *target_value) {
 }
 
 int evaluate_ast(struct AstNode *root) {
+    struct VariableMap vairable_map[MAP_SIZE];
+
     int result = 0;
+    const char *alpha_result = "";
 
     if (root == NULL) {
         printf("Error: Cannot evaluate NULL node!\n");
@@ -186,12 +189,16 @@ int evaluate_ast(struct AstNode *root) {
                 break;
             case ALPHA:
                 result = evaluate_ast(root->right);
+                alpha_result = root->token_alpha_value;
+
+                insert_variable(vairable_map, root->left->token_alpha_value, result); 
                 break;
             case ASSIGN:
                 result = evaluate_ast(root->right);
                 break;
         }
     }
+    print_variable_map(vairable_map);
     return result;
 }
 
