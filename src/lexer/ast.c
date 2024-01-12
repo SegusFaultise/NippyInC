@@ -191,14 +191,14 @@ int evaluate_ast(struct AstNode *root) {
                 result = evaluate_ast(root->right);
                 alpha_result = root->token_alpha_value;
 
-                insert_variable(vairable_map, root->left->token_alpha_value, result); 
+                //insert_variable(vairable_map, root->left->token_alpha_value, result); 
                 break;
             case ASSIGN:
                 result = evaluate_ast(root->right);
                 break;
         }
     }
-    print_variable_map(vairable_map);
+    //print_variable_map(vairable_map);
     return result;
 }
 
