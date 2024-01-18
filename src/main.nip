@@ -1,7 +1,4 @@
-add = 10 + 10
-
-minus = 5 - 2
-
-divide = 10 / 2
-
-multiply = 2 * 10
+add = 10 + 10;
+mul = 10 * ;
+div = 4 / 10;
+minus = 5 - 2;

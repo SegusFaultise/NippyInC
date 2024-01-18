@@ -164,7 +164,9 @@ int evaluate_ast(struct AstNode *root) {
     struct VariableMap vairable_map[MAP_SIZE];
 
     int result = 0;
-    const char *alpha_result = "";
+    const char *var_result = "";
+
+    char *temp_string = malloc(strlen(var_result) + 1);
 
     if (root == NULL) {
         printf("Error: Cannot evaluate NULL node!\n");
@@ -184,21 +186,40 @@ int evaluate_ast(struct AstNode *root) {
             case MULTIPLY:
                 result = evaluate_ast(root->left) * evaluate_ast(root->right);
                 break;
-            case DIVIDE:
-                result = evaluate_ast(root->left) / evaluate_ast(root->right);
-                break;
-            case ALPHA:
-                result = evaluate_ast(root->right);
-                alpha_result = root->token_alpha_value;
+            case DIVIDE: {
+                int divisor = evaluate_ast(root->right);
 
-                //insert_variable(vairable_map, root->left->token_alpha_value, result); 
+                if (divisor != 0) {
+                    result = evaluate_ast(root->left) / divisor;
+                } 
+                else {
+                    fprintf(stderr, "ERROR CODE [1]: No division by zero silly!");
+                    exit(-1);
+                }
                 break;
+            }
+            case ALPHA:
+                result = evaluate_ast(root->left);
+                var_result = root->token_alpha_value;
+
+                strcpy(temp_string, var_result);
+                //break;
             case ASSIGN:
                 result = evaluate_ast(root->right);
+                //break;
+                //
+                insert_variable(vairable_map, var_result, result);
+                break;
+            case END_OF_LINE:
+                //result = evaluate_ast(root->right);
+                //printf("alpha_result [ %s ]", alpha_result);
+                
+                //insert_variable(vairable_map, var_result, result);
                 break;
         }
     }
-    //print_variable_map(vairable_map);
+    print_variable_map(vairable_map);
+    free(temp_string);
     return result;
 }
 
