@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
+#include <threads.h>
 
 #include "ast.h"
 #include "variable_map.h"
@@ -202,24 +203,21 @@ int evaluate_ast(struct AstNode *root) {
                 result = evaluate_ast(root->left);
                 var_result = root->token_alpha_value;
 
+                get_variable_value_by_name(vairable_map, root->token_alpha_value);
+
                 strcpy(temp_string, var_result);
-                //break;
+
             case ASSIGN:
                 result = evaluate_ast(root->right);
-                //break;
-                //
+
                 insert_variable(vairable_map, var_result, result);
-                break;
-            case END_OF_LINE:
-                //result = evaluate_ast(root->right);
-                //printf("alpha_result [ %s ]", alpha_result);
-                
-                //insert_variable(vairable_map, var_result, result);
                 break;
         }
     }
-    print_variable_map(vairable_map);
+    //print_variable_map(vairable_map);
+    get_variable_value_by_name(vairable_map, var_result);
     free(temp_string);
+
     return result;
 }
 

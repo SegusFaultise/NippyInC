@@ -1,4 +1,3 @@
-add = 10 + 10;
-mul = 10 * ;
-div = 4 / 10;
-minus = 5 - 2;
+add = 10 + 10
+minus = 5 - 2
+div = 10 / 5
