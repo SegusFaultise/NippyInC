@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "ast.h"
+#include "../include/ast.h"
 
 struct AstNode *_ast_node = NULL;
 

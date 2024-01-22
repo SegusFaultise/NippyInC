@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "variable_map.h"
-#include "../color_print_lib/color_print.h"
+#include "../include/variable_map.h"
+#include "../lib/color_printf_lib/include/color_print.h"
 
 void initialize_variable_map(struct VariableMap variable_map[]) {
     for(int i = 0; i < MAP_SIZE ; i++) {

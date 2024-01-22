@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <threads.h>
 
-#include "ast.h"
-#include "variable_map.h"
-#include "../color_print_lib/color_print.h"
+#include "../include/ast.h"
+#include "../include/variable_map.h"
+#include "../lib/color_printf_lib/include/color_print.h"
 
 char *token_type_enum_to_string(enum TokenType token_type) {
     if(token_type == NUM_KEYS) {
@@ -203,7 +203,7 @@ int evaluate_ast(struct AstNode *root) {
                 result = evaluate_ast(root->left);
                 var_result = root->token_alpha_value;
 
-                get_variable_value_by_name(vairable_map, root->token_alpha_value);
+                //get_variable_value_by_name(vairable_map, root->token_alpha_value);
 
                 strcpy(temp_string, var_result);
 

@@ -1,0 +1,3 @@
+/home/neuralnuts/Projects/Nippy/build/CMakeFiles/nippy.dir
+/home/neuralnuts/Projects/Nippy/build/CMakeFiles/edit_cache.dir
+/home/neuralnuts/Projects/Nippy/build/CMakeFiles/rebuild_cache.dir
