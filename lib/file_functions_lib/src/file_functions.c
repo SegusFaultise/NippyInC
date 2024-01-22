@@ -20,7 +20,6 @@ char *remove_spaces(char *str){
             j++;
         }
     }
-
     str[j] = '\0';
     
     return str;
@@ -72,9 +71,7 @@ char *file_reader(char file_path[]) {
     }
     fclose(fp);
 
-    //char *mod_file_lines = remove_spaces(file_lines);
-    
-    print_file(file_lines, file_path);
+    (void)print_file(file_lines, file_path);
 
     return file_lines;
 }
