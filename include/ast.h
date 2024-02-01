@@ -19,7 +19,8 @@ enum TokenType {
     END_OF_LINE,
     ASSIGN,
     UNDERSCORE,
-    NUM_KEYS
+    NUM_KEYS,
+    IF_STATEMENT
 };
 
 struct AstNode {

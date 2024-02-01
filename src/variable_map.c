@@ -6,7 +6,7 @@
 
 void initialize_variable_map(struct VariableMap variable_map[]) {
     for(int i = 0; i < MAP_SIZE ; i++) {
-        strcpy(variable_map[i].variable_name, "");
+        (void)strcpy(variable_map[i].variable_name, "");
 
         variable_map[i].variable_value_int = 0;
     }
@@ -14,11 +14,11 @@ void initialize_variable_map(struct VariableMap variable_map[]) {
 
 char *get_variable_value_by_name(struct VariableMap variable_map[], const char *variable_name_target) {
     for(int i = 0; i < MAP_SIZE; i++) {
-        int match = strcmp(variable_map[i].variable_name, variable_name_target);
+        int match = (int)strcmp(variable_map[i].variable_name, variable_name_target);
 
         //if(match != 0) break; 
 
-        while(match == 0 && strlen(variable_map[i].variable_name) > 0) {
+        while(match == 0 && (int)strlen(variable_map[i].variable_name) > 0) {
             (void)printf("[FOUND]: %s [VALUE]: %d\n", variable_map[i].variable_name, variable_map[i].variable_value_int);
 
             return variable_map[i].variable_name;
@@ -29,8 +29,9 @@ char *get_variable_value_by_name(struct VariableMap variable_map[], const char *
 
 int insert_variable(struct VariableMap variable_map[], const char *variable_name, int variable_value_int) {
     for(int i = 0; i < MAP_SIZE; i++) {
-        if(strcmp(variable_map[i].variable_name, variable_name) && strlen(variable_name) >= 0) {
-            strcpy(variable_map[i].variable_name, variable_name);
+        if((int)strcmp(variable_map[i].variable_name, variable_name) && (int)strlen(variable_name) >= 0) {
+            (void)strcpy(variable_map[i].variable_name, variable_name);
+
             variable_map[i].variable_value_int = variable_value_int;
 
             return variable_map[i].variable_value_int;
@@ -43,23 +44,23 @@ int insert_variable(struct VariableMap variable_map[], const char *variable_name
 }
 
 void print_variable_map(struct VariableMap variable_map[]) {
-    for(int i = 0; i < MAP_SIZE && strcmp(variable_map[i].variable_name, "") != 0; i++) {
-        primary_color();
-        printf("[VARIABLE_NAME]: ");
-        reset_color();
+    for(int i = 0; i < MAP_SIZE && (int)strcmp(variable_map[i].variable_name, "") != 0; i++) {
+        (void)primary_color();
+        (void)printf("[VARIABLE_NAME]: ");
+        (void)reset_color();
 
-        secondary_color();
-        printf("%s, ", variable_map[i].variable_name);
-        reset_color();
+        (void)secondary_color();
+        (void)printf("%s, ", variable_map[i].variable_name);
+        (void)reset_color();
 
-        primary_color();
-        printf("[VARIABLE_VALUE]: ");
-        reset_color();
+        (void)primary_color();
+        (void)printf("[VARIABLE_VALUE]: ");
+        (void)reset_color();
 
-        secondary_color();
-        printf("%d", variable_map[i].variable_value_int);
-        reset_color();
+        (void)secondary_color();
+        (void)printf("%d", variable_map[i].variable_value_int);
+        (void)reset_color();
 
-        printf("\n");
+        (void)printf("\n");
     }
 }

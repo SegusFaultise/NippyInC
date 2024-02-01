@@ -15,7 +15,13 @@ char *extract_number(char *file_lines, int *index) {
     while ((int)isdigit(file_lines[*index])) {
         (*index)++;
     }
-    if(numeric_literal != NULL) {
+    if(numeric_literal == NULL) {
+        (void)printf("Error: Memory allocation failed");
+        (void)free(numeric_literal);
+
+        return NULL;
+    }
+    else if(numeric_literal != NULL) {
         (void)strncpy(numeric_literal, file_lines + start, *index - start);
 
         numeric_literal[*index - start] = '\0';
@@ -41,6 +47,8 @@ char *extract_alpha(char *file_lines, int *i) {
 
         if (alpha_literal == NULL) {
             (void)printf("Error: Memory allocation failed");
+            (void)free(alpha_literal);
+
             return NULL;
         }
         (void)strncpy(alpha_literal, file_lines + start, length);
@@ -53,11 +61,19 @@ char *extract_alpha(char *file_lines, int *i) {
 
 void tokenize(char *file_lines) {
     for(int i = 0; file_lines[i] != '\0'; i++) {
+        //char *alpha_result = extract_alpha(file_lines, &i);
+
         if(isdigit(file_lines[i])) {
             (void)insert_token(&_ast_node, (char*)extract_number(file_lines, &i), INTEGER);
         }
         if(isalpha(file_lines[i])) {
-            (void)insert_token(&_ast_node, (char*)extract_alpha(file_lines, &i), ALPHA);
+            char *extracted_alpha = (char*)extract_alpha(file_lines, &i);
+            if(strcmp("if", extracted_alpha) == 0) {
+                (void)insert_token(&_ast_node, extracted_alpha, IF_STATEMENT);
+            }
+            else {
+                (void)insert_token(&_ast_node, (char*)extract_alpha(file_lines, &i), ALPHA);
+            }
         }
         else {
             switch(file_lines[i]) {
