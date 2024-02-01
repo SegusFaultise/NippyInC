@@ -20,7 +20,9 @@ enum TokenType {
     ASSIGN,
     UNDERSCORE,
     NUM_KEYS,
-    IF_STATEMENT
+    IF_STATEMENT,
+    FOR_LOOP,
+    WHILE_LOOP
 };
 
 struct AstNode {

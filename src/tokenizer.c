@@ -6,6 +6,10 @@
 
 #include "../include/ast.h"
 
+#define IF_KEY_WORD "if"
+#define FOR_KEY_WORD "for"
+#define WHILE_KEY_WORD "while"
+
 struct AstNode *_ast_node = NULL;
 
 char *extract_number(char *file_lines, int *index) {
@@ -61,19 +65,20 @@ char *extract_alpha(char *file_lines, int *i) {
 
 void tokenize(char *file_lines) {
     for(int i = 0; file_lines[i] != '\0'; i++) {
-        //char *alpha_result = extract_alpha(file_lines, &i);
-
-        if(isdigit(file_lines[i])) {
-            (void)insert_token(&_ast_node, (char*)extract_number(file_lines, &i), INTEGER);
-        }
+        if(isdigit(file_lines[i])) (void)insert_token(&_ast_node, (char*)extract_number(file_lines, &i), INTEGER);
         if(isalpha(file_lines[i])) {
             char *extracted_alpha = (char*)extract_alpha(file_lines, &i);
-            if(strcmp("if", extracted_alpha) == 0) {
-                (void)insert_token(&_ast_node, extracted_alpha, IF_STATEMENT);
-            }
-            else {
-                (void)insert_token(&_ast_node, (char*)extract_alpha(file_lines, &i), ALPHA);
-            }
+
+            int if_cmp = (int)strcmp(IF_KEY_WORD, extracted_alpha);
+            int for_cmp = (int)strcmp(FOR_KEY_WORD, extracted_alpha); 
+            int while_cmp = (int)strcmp(WHILE_KEY_WORD, extracted_alpha); 
+
+            if(if_cmp == 0) (void)insert_token(&_ast_node, extracted_alpha, IF_STATEMENT);
+            if(for_cmp == 0) (void)insert_token(&_ast_node, extracted_alpha, FOR_LOOP);
+            if(while_cmp == 0) (void)insert_token(&_ast_node, extracted_alpha, WHILE_LOOP);
+
+            else if(if_cmp != 0 || for_cmp != 0 || while_cmp != 0) continue;
+            else (void)insert_token(&_ast_node, (char*)extract_alpha(file_lines, &i), ALPHA);
         }
         else {
             switch(file_lines[i]) {

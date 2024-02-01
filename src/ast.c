@@ -46,6 +46,10 @@ char *token_type_enum_to_string(enum TokenType token_type) {
                 return "NUM_KEYS";
             case IF_STATEMENT:
                 return "IF_STATMENT";
+            case FOR_LOOP:
+                return "FOR_LOOP";
+            case WHILE_LOOP:
+                return "WHILE_LOOP";
             default:
                 return NULL;
         }
