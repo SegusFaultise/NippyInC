@@ -9,5 +9,5 @@ Simple programming language, built in C
 - [x] ast
 - [x] code evaluation
 - [ ] error handler
-- [ ] Code optimiaer
+- [ ] Code optimizer
 - [ ] Code generator
