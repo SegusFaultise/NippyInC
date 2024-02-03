@@ -273,29 +273,29 @@ src/variable_map.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nippy.dir/build.make CMakeFiles/nippy.dir/src/variable_map.c.s
 .PHONY : src/variable_map.c.s
 
-tests/lexer_tests.o: tests/lexer_tests.c.o
-.PHONY : tests/lexer_tests.o
+tests/src/lexer_tests.o: tests/src/lexer_tests.c.o
+.PHONY : tests/src/lexer_tests.o
 
 # target to build an object file
-tests/lexer_tests.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nippy.dir/build.make CMakeFiles/nippy.dir/tests/lexer_tests.c.o
-.PHONY : tests/lexer_tests.c.o
+tests/src/lexer_tests.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nippy.dir/build.make CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o
+.PHONY : tests/src/lexer_tests.c.o
 
-tests/lexer_tests.i: tests/lexer_tests.c.i
-.PHONY : tests/lexer_tests.i
+tests/src/lexer_tests.i: tests/src/lexer_tests.c.i
+.PHONY : tests/src/lexer_tests.i
 
 # target to preprocess a source file
-tests/lexer_tests.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nippy.dir/build.make CMakeFiles/nippy.dir/tests/lexer_tests.c.i
-.PHONY : tests/lexer_tests.c.i
+tests/src/lexer_tests.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nippy.dir/build.make CMakeFiles/nippy.dir/tests/src/lexer_tests.c.i
+.PHONY : tests/src/lexer_tests.c.i
 
-tests/lexer_tests.s: tests/lexer_tests.c.s
-.PHONY : tests/lexer_tests.s
+tests/src/lexer_tests.s: tests/src/lexer_tests.c.s
+.PHONY : tests/src/lexer_tests.s
 
 # target to generate assembly for a file
-tests/lexer_tests.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nippy.dir/build.make CMakeFiles/nippy.dir/tests/lexer_tests.c.s
-.PHONY : tests/lexer_tests.c.s
+tests/src/lexer_tests.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nippy.dir/build.make CMakeFiles/nippy.dir/tests/src/lexer_tests.c.s
+.PHONY : tests/src/lexer_tests.c.s
 
 # Help Target
 help:
@@ -324,9 +324,9 @@ help:
 	@echo "... src/variable_map.o"
 	@echo "... src/variable_map.i"
 	@echo "... src/variable_map.s"
-	@echo "... tests/lexer_tests.o"
-	@echo "... tests/lexer_tests.i"
-	@echo "... tests/lexer_tests.s"
+	@echo "... tests/src/lexer_tests.o"
+	@echo "... tests/src/lexer_tests.i"
+	@echo "... tests/src/lexer_tests.s"
 .PHONY : help
 
 

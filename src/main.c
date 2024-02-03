@@ -2,7 +2,7 @@
 
 #include "../lib/file_functions_lib/include/file_functions.h"
 #include "../include/tokenizer.h"
-#include "../tests/lexer_tests.h"
+#include "../tests/include/lexer_tests.h"
 
 int main() {
     printf("\nRunning from main.c ...\n\n");

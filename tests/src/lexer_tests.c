@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/tokenizer.h"
-#include "../include/ast.h"
-#include "../lib/file_functions_lib/include/file_functions.h"
-#include "../lib/color_printf_lib/include/color_print.h"
-#include "../include/variable_map.h"
+#include "../../include/tokenizer.h"
+#include "../../include/ast.h"
+#include "../../lib/file_functions_lib/include/file_functions.h"
+#include "../../lib/color_printf_lib/include/color_print.h"
+#include "../../include/variable_map.h"
 
 #define TEST_RESULT_SIZE 7
 

@@ -156,7 +156,7 @@ CMakeFiles/nippy.dir/src/main.c.o: ../src/main.c \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   ../lib/file_functions_lib/include/file_functions.h \
   ../include/tokenizer.h \
-  ../tests/lexer_tests.h
+  ../tests/include/lexer_tests.h
 
 CMakeFiles/nippy.dir/src/tokenizer.c.o: ../src/tokenizer.c \
   /usr/include/stdc-predef.h \
@@ -227,7 +227,7 @@ CMakeFiles/nippy.dir/src/variable_map.c.o: ../src/variable_map.c \
   ../include/variable_map.h \
   ../lib/color_printf_lib/include/color_print.h
 
-CMakeFiles/nippy.dir/tests/lexer_tests.c.o: ../tests/lexer_tests.c \
+CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o: ../tests/src/lexer_tests.c \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -295,6 +295,8 @@ CMakeFiles/nippy.dir/tests/lexer_tests.c.o: ../tests/lexer_tests.c \
 
 ../src/variable_map.c:
 
+../tests/include/lexer_tests.h:
+
 ../include/tokenizer.h:
 
 ../lib/file_functions_lib/include/file_functions.h:
@@ -353,8 +355,6 @@ CMakeFiles/nippy.dir/tests/lexer_tests.c.o: ../tests/lexer_tests.c \
 
 /usr/include/stdio.h:
 
-../tests/lexer_tests.c:
-
 /usr/include/threads.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
@@ -397,13 +397,13 @@ CMakeFiles/nippy.dir/tests/lexer_tests.c.o: ../tests/lexer_tests.c \
 
 ../src/ast.c:
 
+../tests/src/lexer_tests.c:
+
 ../src/main.c:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-../tests/lexer_tests.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 

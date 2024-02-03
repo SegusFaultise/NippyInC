@@ -11,8 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/nippy.dir/src/tokenizer.c.o.d"
   "CMakeFiles/nippy.dir/src/variable_map.c.o"
   "CMakeFiles/nippy.dir/src/variable_map.c.o.d"
-  "CMakeFiles/nippy.dir/tests/lexer_tests.c.o"
-  "CMakeFiles/nippy.dir/tests/lexer_tests.c.o.d"
+  "CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o"
+  "CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o.d"
   "nippy"
   "nippy.pdb"
 )

@@ -97,19 +97,19 @@ CMakeFiles/nippy.dir/src/tokenizer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/nippy.dir/src/tokenizer.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/neuralnuts/Projects/Nippy/src/tokenizer.c -o CMakeFiles/nippy.dir/src/tokenizer.c.s
 
-CMakeFiles/nippy.dir/tests/lexer_tests.c.o: CMakeFiles/nippy.dir/flags.make
-CMakeFiles/nippy.dir/tests/lexer_tests.c.o: ../tests/lexer_tests.c
-CMakeFiles/nippy.dir/tests/lexer_tests.c.o: CMakeFiles/nippy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neuralnuts/Projects/Nippy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/nippy.dir/tests/lexer_tests.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nippy.dir/tests/lexer_tests.c.o -MF CMakeFiles/nippy.dir/tests/lexer_tests.c.o.d -o CMakeFiles/nippy.dir/tests/lexer_tests.c.o -c /home/neuralnuts/Projects/Nippy/tests/lexer_tests.c
+CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o: CMakeFiles/nippy.dir/flags.make
+CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o: ../tests/src/lexer_tests.c
+CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o: CMakeFiles/nippy.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neuralnuts/Projects/Nippy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o -MF CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o.d -o CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o -c /home/neuralnuts/Projects/Nippy/tests/src/lexer_tests.c
 
-CMakeFiles/nippy.dir/tests/lexer_tests.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/nippy.dir/tests/lexer_tests.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/neuralnuts/Projects/Nippy/tests/lexer_tests.c > CMakeFiles/nippy.dir/tests/lexer_tests.c.i
+CMakeFiles/nippy.dir/tests/src/lexer_tests.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/nippy.dir/tests/src/lexer_tests.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/neuralnuts/Projects/Nippy/tests/src/lexer_tests.c > CMakeFiles/nippy.dir/tests/src/lexer_tests.c.i
 
-CMakeFiles/nippy.dir/tests/lexer_tests.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/nippy.dir/tests/lexer_tests.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/neuralnuts/Projects/Nippy/tests/lexer_tests.c -o CMakeFiles/nippy.dir/tests/lexer_tests.c.s
+CMakeFiles/nippy.dir/tests/src/lexer_tests.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/nippy.dir/tests/src/lexer_tests.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/neuralnuts/Projects/Nippy/tests/src/lexer_tests.c -o CMakeFiles/nippy.dir/tests/src/lexer_tests.c.s
 
 CMakeFiles/nippy.dir/lib/file_functions_lib/src/file_functions.c.o: CMakeFiles/nippy.dir/flags.make
 CMakeFiles/nippy.dir/lib/file_functions_lib/src/file_functions.c.o: ../lib/file_functions_lib/src/file_functions.c
@@ -171,7 +171,7 @@ CMakeFiles/nippy.dir/src/ast.c.s: cmake_force
 nippy_OBJECTS = \
 "CMakeFiles/nippy.dir/src/main.c.o" \
 "CMakeFiles/nippy.dir/src/tokenizer.c.o" \
-"CMakeFiles/nippy.dir/tests/lexer_tests.c.o" \
+"CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o" \
 "CMakeFiles/nippy.dir/lib/file_functions_lib/src/file_functions.c.o" \
 "CMakeFiles/nippy.dir/lib/color_printf_lib/src/color_print.c.o" \
 "CMakeFiles/nippy.dir/src/variable_map.c.o" \
@@ -182,7 +182,7 @@ nippy_EXTERNAL_OBJECTS =
 
 nippy: CMakeFiles/nippy.dir/src/main.c.o
 nippy: CMakeFiles/nippy.dir/src/tokenizer.c.o
-nippy: CMakeFiles/nippy.dir/tests/lexer_tests.c.o
+nippy: CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o
 nippy: CMakeFiles/nippy.dir/lib/file_functions_lib/src/file_functions.c.o
 nippy: CMakeFiles/nippy.dir/lib/color_printf_lib/src/color_print.c.o
 nippy: CMakeFiles/nippy.dir/src/variable_map.c.o

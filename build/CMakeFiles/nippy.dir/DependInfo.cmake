@@ -14,7 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/neuralnuts/Projects/Nippy/src/main.c" "CMakeFiles/nippy.dir/src/main.c.o" "gcc" "CMakeFiles/nippy.dir/src/main.c.o.d"
   "/home/neuralnuts/Projects/Nippy/src/tokenizer.c" "CMakeFiles/nippy.dir/src/tokenizer.c.o" "gcc" "CMakeFiles/nippy.dir/src/tokenizer.c.o.d"
   "/home/neuralnuts/Projects/Nippy/src/variable_map.c" "CMakeFiles/nippy.dir/src/variable_map.c.o" "gcc" "CMakeFiles/nippy.dir/src/variable_map.c.o.d"
-  "/home/neuralnuts/Projects/Nippy/tests/lexer_tests.c" "CMakeFiles/nippy.dir/tests/lexer_tests.c.o" "gcc" "CMakeFiles/nippy.dir/tests/lexer_tests.c.o.d"
+  "/home/neuralnuts/Projects/Nippy/tests/src/lexer_tests.c" "CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o" "gcc" "CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o.d"
   )
 
 # Targets to which this target links.

@@ -160,7 +160,7 @@ CMakeFiles/nippy.dir/src/main.c.o
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h
  /home/neuralnuts/Projects/Nippy/lib/file_functions_lib/include/file_functions.h
  /home/neuralnuts/Projects/Nippy/include/tokenizer.h
- /home/neuralnuts/Projects/Nippy/tests/lexer_tests.h
+ /home/neuralnuts/Projects/Nippy/tests/include/lexer_tests.h
 
 CMakeFiles/nippy.dir/src/tokenizer.c.o
  /home/neuralnuts/Projects/Nippy/src/tokenizer.c
@@ -233,8 +233,8 @@ CMakeFiles/nippy.dir/src/variable_map.c.o
  /home/neuralnuts/Projects/Nippy/include/variable_map.h
  /home/neuralnuts/Projects/Nippy/lib/color_printf_lib/include/color_print.h
 
-CMakeFiles/nippy.dir/tests/lexer_tests.c.o
- /home/neuralnuts/Projects/Nippy/tests/lexer_tests.c
+CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o
+ /home/neuralnuts/Projects/Nippy/tests/src/lexer_tests.c
  /usr/include/stdc-predef.h
  /usr/include/stdio.h
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
