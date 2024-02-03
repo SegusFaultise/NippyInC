@@ -1,6 +1,4 @@
-d = 10
-h = 3
+var_d = 10
+Var_h = 3
 
-if()
-while()
-for()
+if(var_d)

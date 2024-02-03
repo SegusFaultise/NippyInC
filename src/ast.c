@@ -90,9 +90,60 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
         int is_if_statement = (type == IF_STATEMENT);
         int is_while_loop = (type == WHILE_LOOP);
         int is_for_loop = (type == FOR_LOOP);
+        int is_left_round_bracket = (type == LEFT_ROUND_BRACKET);
+        int is_right_round_bracket = (type == RIGHT_ROUND_BRACKET);
 
         int token_type_is_operator = ((*root)->token_type == ADDITION || (*root)->token_type == MULTIPLY ||
                 (*root)->token_type == DIVIDE || (*root)->token_type == MINUS);
+
+        if(is_if_statement) {
+            struct AstNode *new_root = (struct AstNode*)create_node(type, token);
+
+            new_root->left = *root;
+            *root = new_root;
+
+            return;
+        }
+        else if (((*root))->token_type == IF_STATEMENT && ((*root))->token_type != ALPHA) {
+            root = &((*root)->right);
+            continue;
+        } 
+        else if(is_left_round_bracket) {
+            struct AstNode *new_root = (struct AstNode*)create_node(type, token);
+
+            new_root->left = *root;
+            *root = new_root;
+
+            return;
+        }
+        else if (((*root))->token_type == LEFT_ROUND_BRACKET) {
+            root = &((*root)->right);
+            continue;
+        } 
+        else if(is_alpha) {
+            struct AstNode *new_root = (struct AstNode*)create_node(type, token);
+
+            new_root->left = *root;
+            *root = new_root;
+
+            return;
+        }
+        else if (((*root))->token_type == ALPHA) {
+            root = &((*root)->right);
+            continue;
+        } 
+        else if(is_right_round_bracket) {
+            struct AstNode *new_root = (struct AstNode*)create_node(type, token);
+
+            new_root->left = *root;
+            *root = new_root;
+
+            return;
+        }
+        else if (((*root))->token_type == RIGHT_ROUND_BRACKET) {
+            root = &((*root)->right);
+            continue;
+        } 
 
         if(is_alpha) {
             struct AstNode *new_root = (struct AstNode*)create_node(type, token);
@@ -116,6 +167,7 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
         else if (((*root))->token_type == ASSIGN) {
             root = &((*root)->right);
         } 
+        
         else if(is_operator) {
             struct AstNode *new_root = (struct AstNode*)create_node(type, token);
 
@@ -124,6 +176,7 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
 
             return;
         }
+
         else if (is_integer) {
             if (token_type_is_operator) {
                 root = &((*root)->right);
@@ -218,6 +271,16 @@ int evaluate_ast(struct AstNode *root) {
                 result = (int)evaluate_ast(root->right);
 
                 (void)insert_variable(vairable_map, var_result, result);
+                break;
+            case IF_STATEMENT:
+                result = (int)evaluate_ast(root->left);
+
+            case LEFT_ROUND_BRACKET:
+                result = (int)evaluate_ast(root->right);
+                break;
+
+            case RIGHT_ROUND_BRACKET:
+                result = (int)evaluate_ast(root->right);
                 break;
         }
     }
