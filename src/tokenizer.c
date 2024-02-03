@@ -1,10 +1,12 @@
 #include <malloc.h>
 #include <ctype.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
 #include "../include/ast.h"
+
+#define MATCH 0
+#define NO_MATCH -1
 
 #define IF_KEY_WORD "if"
 #define FOR_KEY_WORD "for"
@@ -65,20 +67,24 @@ char *extract_alpha(char *file_lines, int *i) {
 
 void tokenize(char *file_lines) {
     for(int i = 0; file_lines[i] != '\0'; i++) {
-        if(isdigit(file_lines[i])) (void)insert_token(&_ast_node, (char*)extract_number(file_lines, &i), INTEGER);
         if(isalpha(file_lines[i])) {
             char *extracted_alpha = (char*)extract_alpha(file_lines, &i);
 
-            int if_cmp = (int)strcmp(IF_KEY_WORD, extracted_alpha);
-            int for_cmp = (int)strcmp(FOR_KEY_WORD, extracted_alpha); 
-            int while_cmp = (int)strcmp(WHILE_KEY_WORD, extracted_alpha); 
+            int if_compare = (int)strcmp(IF_KEY_WORD, extracted_alpha);
+            int for_compare = (int)strcmp(FOR_KEY_WORD, extracted_alpha); 
+            int while_compare = (int)strcmp(WHILE_KEY_WORD, extracted_alpha); 
 
-            if(if_cmp == 0) (void)insert_token(&_ast_node, extracted_alpha, IF_STATEMENT);
-            if(for_cmp == 0) (void)insert_token(&_ast_node, extracted_alpha, FOR_LOOP);
-            if(while_cmp == 0) (void)insert_token(&_ast_node, extracted_alpha, WHILE_LOOP);
-
-            else if(if_cmp != 0 || for_cmp != 0 || while_cmp != 0) continue;
-            else (void)insert_token(&_ast_node, (char*)extract_alpha(file_lines, &i), ALPHA);
+            if(if_compare == MATCH || for_compare == MATCH || while_compare == MATCH){
+                if(if_compare == MATCH) (void)insert_token(&_ast_node, extracted_alpha, IF_STATEMENT);
+                if(for_compare == MATCH) (void)insert_token(&_ast_node, extracted_alpha, FOR_LOOP);
+                if(while_compare == MATCH) (void)insert_token(&_ast_node, extracted_alpha, WHILE_LOOP);
+            }
+            else {
+                (void)insert_token(&_ast_node, extracted_alpha, ALPHA);
+            }
+        }
+        if(isdigit(file_lines[i])) {
+            (void)insert_token(&_ast_node, (char*)extract_number(file_lines, &i), INTEGER);
         }
         else {
             switch(file_lines[i]) {

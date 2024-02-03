@@ -87,6 +87,10 @@ void insert_token(struct AstNode **root, const char *token, enum TokenType type)
         int is_alpha = (type == ALPHA);
         int is_assign = (type == ASSIGN);
         int is_integer = (type == INTEGER);
+        int is_if_statement = (type == IF_STATEMENT);
+        int is_while_loop = (type == WHILE_LOOP);
+        int is_for_loop = (type == FOR_LOOP);
+
         int token_type_is_operator = ((*root)->token_type == ADDITION || (*root)->token_type == MULTIPLY ||
                 (*root)->token_type == DIVIDE || (*root)->token_type == MINUS);
 
