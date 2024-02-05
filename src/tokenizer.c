@@ -11,6 +11,7 @@
 #define IF_KEY_WORD "if"
 #define FOR_KEY_WORD "for"
 #define WHILE_KEY_WORD "while"
+#define THAN_KEY_WORD "than"
 
 struct AstNode *_ast_node = NULL;
 
@@ -73,11 +74,13 @@ void tokenize(char *file_lines) {
             int if_compare = (int)strcmp(IF_KEY_WORD, extracted_alpha);
             int for_compare = (int)strcmp(FOR_KEY_WORD, extracted_alpha); 
             int while_compare = (int)strcmp(WHILE_KEY_WORD, extracted_alpha); 
+            int than_compare = (int)strcmp(THAN_KEY_WORD, extracted_alpha); 
 
-            if(if_compare == MATCH || for_compare == MATCH || while_compare == MATCH){
+            if(if_compare == MATCH || for_compare == MATCH || while_compare == MATCH || than_compare == MATCH){
                 if(if_compare == MATCH) (void)insert_token(&_ast_node, extracted_alpha, IF_STATEMENT);
                 if(for_compare == MATCH) (void)insert_token(&_ast_node, extracted_alpha, FOR_LOOP);
                 if(while_compare == MATCH) (void)insert_token(&_ast_node, extracted_alpha, WHILE_LOOP);
+                if(than_compare == MATCH) (void)insert_token(&_ast_node, extracted_alpha, THAN_STATEMENT);
             }
             else {
                 (void)insert_token(&_ast_node, extracted_alpha, ALPHA);
@@ -122,6 +125,12 @@ void tokenize(char *file_lines) {
                     break;
                 case '=':
                     (void)insert_token(&_ast_node, "=", ASSIGN);
+                    break;
+                case '>':
+                    (void)insert_token(&_ast_node, ">", GREATER_THAN);
+                    break;
+                case '<':
+                    (void)insert_token(&_ast_node, "<", LESS_THAN);
                     break;
                 case ' ':
                     continue;

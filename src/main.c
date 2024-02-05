@@ -7,10 +7,10 @@
 int main() {
     printf("\nRunning from main.c ...\n\n");
 
-    char *file_lines = file_reader("../main.nip");
-    tokenize(file_lines);
+    //char *file_lines = file_reader("../main.nip");
+    //tokenize(file_lines);
 
-    //run_tests();
+    run_tests();
 
     return 0;
 }

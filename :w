@@ -8,9 +8,6 @@
 #include "../include/variable_map.h"
 #include "../lib/color_printf_lib/include/color_print.h"
 
-#define TRUE 0
-#define FALSE 1
-
 char *token_type_enum_to_string(enum TokenType token_type) {
     if(token_type == NUM_KEYS) {
         return NULL;
@@ -57,8 +54,6 @@ char *token_type_enum_to_string(enum TokenType token_type) {
                 return "GREATER_THAN";
             case LESS_THAN:
                 return "LESS_THAN";
-            case THAN_STATEMENT:
-                return "THAN_STATEMENT";
             default:
                 return NULL;
         }
@@ -227,8 +222,6 @@ int evaluate_ast(struct AstNode *root) {
     struct VariableMap vairable_map[MAP_SIZE];
 
     int result = 0;
-    int if_result = 0;
-
     const char *var_result = "";
 
     char *temp_string = (char*)malloc(strlen(var_result) + 1);
@@ -268,12 +261,14 @@ int evaluate_ast(struct AstNode *root) {
                 int arg_two = (int)evaluate_ast(root->right);
 
                 if(arg_one > arg_two) {
-                    if_result = TRUE;
+                    //result = (int)evaluate_ast(root->left);
+                    result = 222;
+                    printf("TRUE");
                 }
-                if(arg_one < arg_two){
-                    if_result = FALSE;
+                else {
+                    result = (int)evaluate_ast(root->left);
                 }
-                printf("%d", if_result);
+
                 //break;
             }
             case ALPHA:
@@ -289,20 +284,15 @@ int evaluate_ast(struct AstNode *root) {
                 break;
             case IF_STATEMENT:
                 result = (int)evaluate_ast(root->left);
-            case THAN_STATEMENT: {
-                printf("%d\n", if_result);
-
-                if(if_result == TRUE) {
-                    //result = (int)evaluate_ast(root->left);
-                    //printf("TRUE \n");
-                    //break;
-                }
-                if(if_result == FALSE){
-                    printf("FALSE");
-                    //break;
-                }
                 break;
-            }
+
+            case LEFT_ROUND_BRACKET:
+                result = (int)evaluate_ast(root->right);
+                break;
+
+            case RIGHT_ROUND_BRACKET:
+                result = (int)evaluate_ast(root->right);
+                break;
         }
     }
     //(void)print_variable_map(vairable_map);

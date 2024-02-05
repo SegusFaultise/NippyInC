@@ -22,7 +22,10 @@ enum TokenType {
     NUM_KEYS,
     IF_STATEMENT,
     FOR_LOOP,
-    WHILE_LOOP
+    WHILE_LOOP,
+    GREATER_THAN,
+    LESS_THAN,
+    THAN_STATEMENT
 };
 
 struct AstNode {
