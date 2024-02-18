@@ -86,6 +86,12 @@ struct AstNode* create_node(enum TokenType type, const char *value) {
 void insert_token(struct AstNode **root, const char *token, enum TokenType type) {
     struct AstNode *new_node = (struct AstNode*)calloc(sizeof(root) + 1, sizeof(struct AstNode));
 
+    if(*root == NULL) {
+        *root = create_node(type, token);
+        
+        return;
+    }
+
     if (new_node == NULL) {
         (void)printf("Error: Memory allocation failed!\n");
         (void)exit(EXIT_FAILURE);
@@ -226,89 +232,85 @@ int get_token_position(struct AstNode *root, const char *target_value) {
 int evaluate_ast(struct AstNode *root) {
     struct VariableMap vairable_map[MAP_SIZE];
 
-    int result = 0;
-    int if_result = 0;
-
     const char *var_result = "";
-
     char *temp_string = (char*)malloc(strlen(var_result) + 1);
 
     if (root == NULL) {
-        (void)printf("Error: Cannot evaluate NULL node!\n");
+        printf("Error: Cannot evaluate NULL node!\n");
         return 0;
     } 
-    else {
-        switch(root->token_type) {
-            case INTEGER:
-                result = (int)atoi(root->token_alpha_value);
-                break;
-            case ADDITION:
-                result = (int)evaluate_ast(root->left) + evaluate_ast(root->right);
-                break;
-            case MINUS:
-                result = (int)evaluate_ast(root->left) - evaluate_ast(root->right);
-                break;
-            case MULTIPLY:
-                result = (int)evaluate_ast(root->left) * evaluate_ast(root->right);
-                break;
-            case DIVIDE: {
-                int divisor = (int)evaluate_ast(root->right);
+    
+    int result = 0;
+    int if_result = FALSE; // Initialize if_result
 
-                if(divisor != 0) {
-                    result = (int)evaluate_ast(root->left) / divisor;
-                } 
-                else {
-                    (void)fprintf(stderr, "ERROR CODE [1]: No division by zero silly!");
-                    (void)exit(-1);
-                }
-                break;
+    switch(root->token_type) {
+        case INTEGER:
+            result = atoi(root->token_alpha_value);
+            break;
+        case ADDITION:
+            result = evaluate_ast(root->left) + evaluate_ast(root->right);
+            break;
+        case MINUS:
+            result = evaluate_ast(root->left) - evaluate_ast(root->right);
+            break;
+        case MULTIPLY:
+            result = evaluate_ast(root->left) * evaluate_ast(root->right);
+            break;
+        case DIVIDE: {
+            int divisor = evaluate_ast(root->right);
+            if (divisor != 0) {
+                result = evaluate_ast(root->left) / divisor;
+            } else {
+                fprintf(stderr, "ERROR CODE [1]: Division by zero is not allowed!\n");
+                exit(-1);
             }
-            case GREATER_THAN: {
-                int arg_one = (int)evaluate_ast(root->left);
-                int arg_two = (int)evaluate_ast(root->right);
+            break;
+        }
+        case GREATER_THAN: {
+            int arg_one = evaluate_ast(root->left);
+            int arg_two = evaluate_ast(root->right);
+            if_result = (arg_one > arg_two) ? TRUE : FALSE;
 
-                if(arg_one > arg_two) {
-                    if_result = TRUE;
-                }
-                if(arg_one < arg_two){
-                    if_result = FALSE;
-                }
-                printf("%d", if_result);
-                //break;
-            }
-            case ALPHA:
-                result = (int)evaluate_ast(root->left);
-                var_result = root->token_alpha_value;
+            printf("%d\n", if_result);
 
-                (void)strcpy(temp_string, var_result);
+            break;
+        }
+        case ALPHA: {
+            // Handle variable retrieval
+            result = (int)evaluate_ast(root->left);
+            var_result = root->token_alpha_value;
 
-            case ASSIGN:
-                result = (int)evaluate_ast(root->right);
+            (void)strcpy(temp_string, var_result);
 
-                (void)insert_variable(vairable_map, var_result, result);
-                break;
-            case IF_STATEMENT:
-                result = (int)evaluate_ast(root->left);
-            case THAN_STATEMENT: {
-                printf("%d\n", if_result);
-
-                if(if_result == TRUE) {
-                    //result = (int)evaluate_ast(root->left);
-                    //printf("TRUE \n");
-                    //break;
-                }
-                if(if_result == FALSE){
-                    printf("FALSE");
-                    //break;
-                }
-                break;
-            }
+            break;
+        }
+        case ASSIGN: {
+            // Handle variable assignment
+            int value_to_assign = evaluate_ast(root->right);
+            insert_variable(vairable_map, var_result, value_to_assign);
+            result = value_to_assign; // Assigning result of assignment
+            break;
+        }
+        case IF_STATEMENT: {
+            // Evaluate if statement condition
+            if_result = evaluate_ast(root->left);
+            break;
+        }
+        case THAN_STATEMENT: {
+            // Handle 'than' statement
+            printf("THAN Statement not implemented!\n");
+            break;
         }
     }
-    //(void)print_variable_map(vairable_map);
+    
+    // If the result of the if statement is TRUE, execute the block
+    if (if_result == TRUE) {
+        result = evaluate_ast(root->right);
+    }
+
     (void)get_variable_value_by_name(vairable_map, var_result);
     (void)free(temp_string);
-
+    
     return result;
 }
 
