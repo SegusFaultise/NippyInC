@@ -1,0 +1,20 @@
+Syntax:
+    - 'pack' packages a file or functions to be used in other files
+        !Rules: haft to specify what you want to packed eg; 
+        "
+            #pack_it_all_up // packs all functions
+
+            #pack // for singal pack
+            foo_func() {
+                Tprint("foo")
+            }
+
+            #!pack // do not pack this function
+            boo_func() {
+                Tprint("boo")
+            }
+
+        "
+
+    - 'unpack' to use packed functions/files 
+

@@ -275,6 +275,15 @@ int evaluate_ast(struct AstNode *root) {
 
             break;
         }
+        case LESS_THAN: {
+            int arg_one = evaluate_ast(root->left);
+            int arg_two = evaluate_ast(root->right);
+            if_result = (arg_one < arg_two) ? TRUE : FALSE;
+
+            printf("%d\n", if_result);
+
+            break;
+        }
         case ALPHA: {
             // Handle variable retrieval
             result = (int)evaluate_ast(root->left);
@@ -303,9 +312,14 @@ int evaluate_ast(struct AstNode *root) {
         }
     }
     
-    // If the result of the if statement is TRUE, execute the block
     if (if_result == TRUE) {
         result = evaluate_ast(root->right);
+
+        printf("ITS TRUE \n");
+        
+    }
+    else {
+    
     }
 
     (void)get_variable_value_by_name(vairable_map, var_result);

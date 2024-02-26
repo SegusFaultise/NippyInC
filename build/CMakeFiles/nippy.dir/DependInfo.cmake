@@ -17,8 +17,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/neuralnuts/Projects/Nippy/tests/src/lexer_tests.c" "CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o" "gcc" "CMakeFiles/nippy.dir/tests/src/lexer_tests.c.o.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.
