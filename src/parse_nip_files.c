@@ -9,13 +9,12 @@ struct FileData {
 };
 
 char *read_in_nip_file(char *file_path) {
-    struct FileData file_data = malloc(sizeof(file_data) + 1);
+    struct FileData file_data;
 
     int file_descriptor = open(file_path, O_RDONLY);
     int nb_read = -1;
 
-    size_t *buffer_size = malloc(sizeof(file_descriptor));
-    file_data.file_buffer[*buffer_size];
+    file_data.file_buffer = (char*)malloc(sizeof(file_descriptor));
 
     char *file_contents;
 
@@ -33,11 +32,9 @@ char *read_in_nip_file(char *file_path) {
         }
     
         file_data.file_buffer[nb_read] = '\0';
-
-        printf("%s\n", file_data.file_buffer);
-
+        break;
     }
     close(file_descriptor);
 
-    return "";
+    return file_data.file_buffer;
 }
