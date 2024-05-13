@@ -1,4 +1,6 @@
+#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <strings.h>
 
@@ -8,52 +10,24 @@
 #define TEST2_FILE_PATH "../sonnets.txt"
 
 #define STRING_IGNORES "\t\n "
+#define RAW_FILE_STRING_PAD sizeof(uint64_t)
 
-struct TokenArray {
-    char string_token[100];
-    long token_array_size;
-};
+void build_token_stream(char *raw_file_string, size_t raw_file_string_size) {
+    size_t token_index = 0;
 
-void print_token_array(struct TokenArray token_array[]) {
-    for(int i = 0; i < token_array[i].token_array_size; i++) {
-        printf("%s\n", token_array[i].string_token);
-    }
-}
-
-void insert_tokens(struct TokenArray token_array[], char *token, int index, long file_size) {
-    if(index < file_size) {
-        strcpy(token_array[index].string_token, token);
-    }
-}
-
-void insert_token_array_size(struct TokenArray token_array[]) {
-    size_t token_array_length = 0;
-
-    while(token_array[token_array_length].string_token != NULL) {
-        token_array_length++;
-        break;
+    if(raw_file_string == NULL) {
+        fprintf(stderr, "Error: The giving [raw_file_string] is NULL!");
+        exit(-1);
     }
 
-    token_array->token_array_size = token_array_length;
-    return;
-}
-
-void build_token_stream(struct TokenArray token_array[], char *file_contents, struct FileData *file_data) {
-    char *pch;
-    int index = 0;
-    long file_size = file_data->file_size;
-
-    pch = strtok(file_contents, STRING_IGNORES);
-
-    while (pch != NULL && index < file_size) {
-        if(pch == NULL) {
-            return;
+    while(token_index < raw_file_string_size) {
+        if(isalpha(raw_file_string[token_index])) {
+            printf("TOKEN_ALPHAS: %c\n", raw_file_string[token_index]);
         }
-
-        insert_tokens(token_array, pch, index, file_size);
-        index++;
-    
-        pch = strtok(NULL, STRING_IGNORES);
+        else {
+            printf("TOKEN_SYMBOLS: %c\n", raw_file_string[token_index]);
+        }
+        token_index++;
     }
 }
 
@@ -63,20 +37,11 @@ int main(int argc, char **argv) {
     struct FileData file_data;
 
     char *file_contents = read_in_nip_file(TEST_FILE_PATH, &file_data);
-    long file_size = strnlen(file_contents, strlen(file_contents));
-
-    struct TokenArray token_array[file_size];
+    size_t file_size = strnlen(file_contents, strlen(file_contents));
 
     printf("[PARSED NIP FILE] %s\n", file_contents);
 
-    printf("%ld", file_data.file_size);
-
-    build_token_stream(token_array, file_contents, &file_data);
-    insert_token_array_size(token_array);
-
-    print_token_array(token_array);
-
-
+    build_token_stream(file_contents, file_size);
 
     return 0;
 }
