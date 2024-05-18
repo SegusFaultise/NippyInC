@@ -1,0 +1,88 @@
+--------------------------------------------------------------------------------
+Profile data file 'callgrind.out.17134' (creator: callgrind-3.21.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 2928722
+Trigger: Program termination
+Profiled target:  ./Nippy (PID 17134, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                  
+--------------------------------------------------------------------------------
+14,294,322 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                  file:function
+--------------------------------------------------------------------------------
+1,545,189 (10.81%)  ???:build_token_stream [/home/neuralnuts/Projects/Nippy/build/Nippy]
+1,374,781 ( 9.62%)  ./stdio-common/./stdio-common/vfprintf-internal.c:__printf_buffer [/usr/lib/x86_64-linux-gnu/libc.so.6]
+1,146,582 ( 8.02%)  ./stdio-common/./stdio-common/Xprintf_buffer_write.c:__printf_buffer_write [/usr/lib/x86_64-linux-gnu/libc.so.6]
+1,063,032 ( 7.44%)  ./libio/./libio/fileops.c:_IO_file_xsputn@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  846,040 ( 5.92%)  ???:extract_alpha [/home/neuralnuts/Projects/Nippy/build/Nippy]
+  742,628 ( 5.20%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  694,580 ( 4.86%)  ./libio/./libio/fileops.c:_IO_do_write@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  694,477 ( 4.86%)  ./stdio-common/./stdio-common/vfprintf-internal.c:__vfprintf_internal [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  581,451 ( 4.07%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  538,574 ( 3.77%)  ./string/../sysdeps/x86_64/multiarch/strchr-avx2.S:__strchrnul_avx2 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  524,475 ( 3.67%)  ./libio/./libio/fileops.c:_IO_file_write@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  496,055 ( 3.47%)  ./stdio-common/./stdio-common/printf_buffer_to_file.c:__printf_buffer_to_file_done [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  439,396 ( 3.07%)  ./ctype/../include/ctype.h:__ctype_b_loc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  425,190 ( 2.97%)  ./stdio-common/./stdio-common/printf.c:printf [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  368,498 ( 2.58%)  ./stdio-common/./stdio-common/printf_buffer_to_file.c:__printf_buffer_to_file_switch [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  326,488 ( 2.28%)  ./libio/./libio/fileops.c:_IO_file_overflow@@GLIBC_2.2.5 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  269,287 ( 1.88%)  ./stdio-common/./stdio-common/Xprintf_buffer_done.c:__printf_buffer_done [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  266,862 ( 1.87%)  ./stdio-common/./stdio-common/vfprintf-process-arg.c:__printf_buffer
+  225,923 ( 1.58%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  219,698 ( 1.54%)  ???:0x00000000001091f0 [???]
+  186,033 ( 1.30%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__mempcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  140,736 ( 0.98%)  ./stdio-common/../include/printf_buffer.h:__printf_buffer
+  127,557 ( 0.89%)  ./stdio-common/./stdio-common/printf-parse.h:__printf_buffer
+  113,400 ( 0.79%)  ./io/../sysdeps/unix/sysv/linux/write.c:write [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  101,169 ( 0.71%)  ./stdio-common/../string/bits/string_fortified.h:__printf_buffer_write
+   85,038 ( 0.59%)  ./stdio-common/../include/printf_buffer.h:__printf_buffer_to_file_init
+   78,581 ( 0.55%)  ./string/../sysdeps/x86_64/multiarch/strlen-avx2.S:__strlen_avx2 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   70,875 ( 0.50%)  ./libio/./libio/libioP.h:_IO_do_write@@GLIBC_2.2.5
+   70,870 ( 0.50%)  ./libio/./libio/libioP.h:_IO_file_xsputn@@GLIBC_2.2.5
+   70,865 ( 0.50%)  ./stdio-common/../libio/libioP.h:__printf_buffer_to_file_done
+   70,865 ( 0.50%)  ./stdio-common/./stdio-common/printf_buffer_to_file.c:__printf_buffer_to_file_init [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   67,446 ( 0.47%)  ???:0x0000000004878690 [???]
+   56,692 ( 0.40%)  ???:0x0000000004878580 [???]
+   28,346 ( 0.20%)  ???:0x0000000000109160 [???]
+   28,346 ( 0.20%)  ???:0x0000000004878420 [???]
+   25,988 ( 0.18%)  ./elf/./elf/dl-tunables.c:__GI___tunables_init [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+   24,168 ( 0.17%)  ./elf/./elf/dl-lookup.c:do_lookup_x [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+   21,520 ( 0.15%)  ./malloc/./malloc/malloc.c:alloc_perturb [/usr/lib/x86_64-linux-gnu/libc.so.6]
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  ./ctype/../include/ctype.h
+  ./elf/./elf/dl-lookup.c
+  ./elf/./elf/dl-tunables.c
+  ./io/../sysdeps/unix/sysv/linux/write.c
+  ./libio/./libio/fileops.c
+  ./libio/./libio/libioP.h
+  ./malloc/./malloc/malloc.c
+  ./stdio-common/../include/printf_buffer.h
+  ./stdio-common/../libio/libioP.h
+  ./stdio-common/../string/bits/string_fortified.h
+  ./stdio-common/./stdio-common/Xprintf_buffer_done.c
+  ./stdio-common/./stdio-common/Xprintf_buffer_write.c
+  ./stdio-common/./stdio-common/printf-parse.h
+  ./stdio-common/./stdio-common/printf.c
+  ./stdio-common/./stdio-common/printf_buffer_to_file.c
+  ./stdio-common/./stdio-common/vfprintf-internal.c
+  ./stdio-common/./stdio-common/vfprintf-process-arg.c
+  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+  ./string/../sysdeps/x86_64/multiarch/strchr-avx2.S
+  ./string/../sysdeps/x86_64/multiarch/strlen-avx2.S
+

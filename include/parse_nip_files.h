@@ -6,6 +6,7 @@ struct FileData {
     long file_size;
 };
 
-char *read_in_nip_file(char *file_path, struct FileData *file_data);
+char *read_in_nip_file(char *file_path);
+long get_file_size(char *filename);
 
 #endif
