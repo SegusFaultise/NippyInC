@@ -6,6 +6,7 @@
 
 struct BuildFiles build_files[] = {
     {.file_path = "../src/parse_nip_files.c"},
+    {.file_path = "../src/tokenizer.c"},
     {.file_path = "../main.c"},
 };
 

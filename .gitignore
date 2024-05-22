@@ -4,6 +4,10 @@ src/build/
 # Prerequisites
 *.d
 
+# txt files
+*.txt
+*.ll
+
 # Object files
 *.o
 *.ko
