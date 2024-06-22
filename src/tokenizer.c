@@ -9,8 +9,7 @@
 
 #include "../include/tokenizer.h"
 
-#define STRING_IGNORES "\t\n "
-#define IS_CHILD_PROCESS 0
+#define STRING_IGNORES "\t\n\r "
 
 enum TokenTypes {
     DIGIT_TOKEN,
@@ -66,8 +65,6 @@ void build_token_stream(char *raw_file_string, size_t raw_file_string_size, enum
     size_t symbol_token_count = 0;
     size_t digit_token_count = 0;
 
-    pid_t p_fork = fork();
-
     if(raw_file_string == NULL || 
             token_index < 0 || 
             raw_file_string[token_index] == '\0') {
@@ -75,50 +72,21 @@ void build_token_stream(char *raw_file_string, size_t raw_file_string_size, enum
         fprintf(stderr, "Error: The giving [raw_file_string] is NULL!");
         exit(1);
     }
-    if(p_fork < 0) {
-        fprintf(stderr, "Error: fork() failed!");
-        exit(1);
+
+    while(token_index < raw_file_string_size - 1) {
+        if(token_index > raw_file_string_size) break;
+
+        if(ispunct(raw_file_string[token_index])) symbol_token_count++;
+        if(isdigit(raw_file_string[token_index])) digit_token_count++;
+        if(isalpha(raw_file_string[token_index])) {
+            extract_alpha(raw_file_string, &token_index, &raw_file_string_size); 
+            alpha_token_count++;
+        }
+        token_index++;
     }
-    else if(p_fork == IS_CHILD_PROCESS) {
-        while(token_index < raw_file_string_size - 1) {
-            if(token_index > raw_file_string_size) break;
 
-            if(ispunct(raw_file_string[token_index]) && token_debug_arg == DEBUG_OFF) {
-                symbol_token_count++;
-            }
-            else if(ispunct(raw_file_string[token_index]) && token_debug_arg == DEBUG_ON){
-                //printf("TOKEN_SYMBOL:\t %c\n", raw_file_string[token_index]);
-                symbol_token_count++;
-            }
+    if(token_debug_arg == DEBUG_OFF) printf("[DEBUG]: disabled");
+    if(token_debug_arg == DEBUG_ON) get_tokenizer_stats(alpha_token_count, digit_token_count, symbol_token_count, raw_file_string);
 
-            if(isdigit(raw_file_string[token_index]) && token_debug_arg == DEBUG_OFF) {
-                digit_token_count++;
-            }
-            else if(isdigit(raw_file_string[token_index]) && token_debug_arg == DEBUG_ON){
-                //printf("TOKEN_DIGIT:\t %c\n", raw_file_string[token_index]);
-                digit_token_count++;
-            }
-
-            if(isalpha(raw_file_string[token_index]) && token_debug_arg == DEBUG_OFF){
-                extract_alpha(raw_file_string, &token_index, &raw_file_string_size);
-                alpha_token_count++;
-            }
-            else if(isalpha(raw_file_string[token_index]) && token_debug_arg == DEBUG_ON){
-                //printf("TOKEN_ALPHA:\t %s\n", extract_alpha(raw_file_string, &token_index, &raw_file_string_size));
-                extract_alpha(raw_file_string, &token_index, &raw_file_string_size);
-
-                alpha_token_count++;
-            }
-            else {
-                token_index++;
-            }
-        }
-        if(token_debug_arg == DEBUG_ON) {
-            get_tokenizer_stats(alpha_token_count, digit_token_count, symbol_token_count, raw_file_string);
-        }
-        else {
-            return;
-        }
-    }
-    return;
+    else return;
 }
