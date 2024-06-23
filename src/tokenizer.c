@@ -76,11 +76,22 @@ void build_token_stream(char *raw_file_string, size_t raw_file_string_size, enum
     while(token_index < raw_file_string_size - 1) {
         if(token_index > raw_file_string_size) break;
 
-        if(ispunct(raw_file_string[token_index])) symbol_token_count++;
-        if(isdigit(raw_file_string[token_index])) digit_token_count++;
+        if(ispunct(raw_file_string[token_index])) {
+            symbol_token_count++;
+
+            printf("%c\n", raw_file_string[token_index]);
+        }
+        if(isdigit(raw_file_string[token_index])) {
+            digit_token_count++;
+
+            printf("%d\n", atoi(&raw_file_string[token_index]));
+        }
         if(isalpha(raw_file_string[token_index])) {
-            extract_alpha(raw_file_string, &token_index, &raw_file_string_size); 
+            char *extracted_alpha = extract_alpha(raw_file_string, &token_index, &raw_file_string_size); 
+
             alpha_token_count++;
+
+            printf("%s\n", extracted_alpha);
         }
         token_index++;
     }

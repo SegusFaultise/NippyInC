@@ -10,16 +10,13 @@
 #define TEST2_FILE_PATH "../TextFiles/sonnets.txt"
 #define TEST3_FILE_PATH "../TextFiles/98M.txt"
 #define TEST4_FILE_PATH "../TextFiles/gen.c"
-#define TEST5_FILE_PATH "../ll.txt"
 
-#define DEBUG_STATMENT printf("DEBUG_IS_HERE\n");
 
 int main(int argc, char **argv) {
-    printf("main() HIT!\n\n");
+    printf("Running: %s\n", argv[0]);
 
-
-    char *file_contents = read_in_nip_file(TEST3_FILE_PATH);
-    size_t file_size = get_file_size(TEST3_FILE_PATH);
+    char *file_contents = read_in_nip_file(TEST_FILE_PATH);
+    size_t file_size = get_file_size(TEST_FILE_PATH);
 
     //printf("[PARSED NIP FILE] %s\n", file_contents);
 
