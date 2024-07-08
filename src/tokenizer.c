@@ -48,6 +48,27 @@ char *extract_alpha(char *token_stream, size_t *token_index, size_t *token_strea
     }
 }
 
+int extract_number(char *token_stream, size_t *token_index) {
+    int start = *token_index;
+    char *numeric_literal = (char*)malloc(*token_index - start + 1);
+
+    while ((int)isdigit(token_stream[*token_index])) {
+        (*token_index)++;
+    }
+    if(numeric_literal == NULL) {
+        (void)printf("Error: Memory allocation failed");
+        (void)free(numeric_literal);
+
+        return -1;
+    }
+    else if(numeric_literal != NULL) {
+        (void)strncpy(numeric_literal, token_stream + start, *token_index - start);
+
+        numeric_literal[*token_index - start] = '\0';
+    }
+    return atoi(numeric_literal);
+}
+
 void get_tokenizer_stats(size_t alpha_token_count, size_t digit_token_count, size_t symbol_token_count, char *token_array) {
     if(alpha_token_count < 0 || digit_token_count < 0 || symbol_token_count < 0) { 
         fprintf(stderr, "Error: token_index out of bounds"); 
@@ -57,6 +78,38 @@ void get_tokenizer_stats(size_t alpha_token_count, size_t digit_token_count, siz
     fprintf(stdout, "\n[NUMBER_OF_ALPHA_TOKENS]:\t (%ld)\n", alpha_token_count);
     fprintf(stdout, "[NUMBER_OF_DIGIT_TOKENS]:\t (%ld)\n", digit_token_count);
     fprintf(stdout, "[NUMBER_OF_SYMBOL_TOKENS]:\t (%ld)\n", symbol_token_count);
+}
+
+enum TokenType {
+    ADDITION,
+    INTEGTER
+};
+
+struct AstNode {
+    char *token_alpha_value;
+    int token_number_value;
+
+    enum TokenType token_type;
+    struct AstNode *left;
+    struct AstNode *right;
+};
+
+struct AstNode* create_node(enum TokenType type, const char *value) {
+    struct AstNode *new_node = (struct AstNode*)malloc(sizeof(struct AstNode));
+
+    if (new_node == NULL) {
+        (void)printf("Error: Memory allocation failed!\n");
+        (void)exit(EXIT_FAILURE);
+    }
+
+    new_node->token_type = type;
+
+    (void)strcpy(new_node->token_alpha_value, value);
+
+    new_node->left = NULL;
+    new_node->right = NULL;
+
+    return new_node;
 }
 
 void build_token_stream(char *raw_file_string, size_t raw_file_string_size, enum TokenDebug token_debug_arg) {
@@ -74,17 +127,21 @@ void build_token_stream(char *raw_file_string, size_t raw_file_string_size, enum
     }
 
     while(token_index < raw_file_string_size - 1) {
-        if(token_index > raw_file_string_size) break;
-
         if(ispunct(raw_file_string[token_index])) {
             symbol_token_count++;
 
             printf("%c\n", raw_file_string[token_index]);
+
+            switch(raw_file_string[token_index]) {
+                case '+': 
+                    printf("[TOKEN_TYPE]: %c\n", raw_file_string[token_index]);
+                    break;
+            }
         }
-        if(isdigit(raw_file_string[token_index])) {
+        if(isdigit(raw_file_string[token_index])) { 
             digit_token_count++;
 
-            printf("%d\n", atoi(&raw_file_string[token_index]));
+            printf("%d\n", extract_number(raw_file_string, &token_index));
         }
         if(isalpha(raw_file_string[token_index])) {
             char *extracted_alpha = extract_alpha(raw_file_string, &token_index, &raw_file_string_size); 
@@ -101,3 +158,5 @@ void build_token_stream(char *raw_file_string, size_t raw_file_string_size, enum
 
     else return;
 }
+
+
